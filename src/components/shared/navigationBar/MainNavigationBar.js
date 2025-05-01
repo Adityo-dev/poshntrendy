@@ -1,5 +1,5 @@
 // import Components
-import BottomNavigationBar from "./BottomNavigationBar";
+import { BottomNavigationBar } from "./BottomNavigationBar";
 import CenterNavigationBar from "./CenterNavigationBar";
 import TopNavigationBar from "./TopNavigationBar";
 
