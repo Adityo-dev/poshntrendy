@@ -182,10 +182,10 @@ export function BottomNavigationBar() {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul
-                      className={`grid gap-3 p-4 ${
+                      className={`grid gap-2 p-2 ${
                         item.featured
-                          ? "md:w-[500px] lg:w-[600px] lg:grid-cols-2"
-                          : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+                          ? "md:w-[500px] lg:w-[800px] lg:grid-cols-2"
+                          : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[500px]"
                       }`}
                     >
                       {item.featured && (
