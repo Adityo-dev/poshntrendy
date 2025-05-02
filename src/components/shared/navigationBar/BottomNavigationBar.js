@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -13,65 +14,18 @@ import {
 } from "@/components/ui/navigation-menu";
 
 const navigationData = [
+  { title: "Home", href: "/" },
+  { title: "New", href: "/new" },
+  { title: "Sale", href: "/sale" },
+  { title: "Lehengas", href: "/lehengas" },
+  { title: "Sarees", href: "/sarees" },
+  { title: "Kurta Sets", href: "/kurta-sets" },
+  { title: "Anarkalis", href: "/anarkalis" },
+  { title: "Shararas", href: "/shararas" },
+  { title: "Dresses", href: "/dresses" },
   {
-    type: "link",
-    title: "Home",
-    href: "/",
-  },
-  {
-    type: "link",
-    title: "New",
-    href: "/new",
-  },
-  {
-    type: "link",
-    title: "Sale",
-    href: "/sale",
-  },
-  {
-    type: "link",
-    title: "New",
-    href: "/new",
-  },
-  {
-    type: "link",
-    title: "Women",
-    href: "/women",
-  },
-  {
-    type: "link",
-    title: "Lehengas",
-    href: "/lehengas",
-  },
-  {
-    type: "link",
-    title: "Sarees",
-    href: "/sarees",
-  },
-  {
-    type: "link",
-    title: "Kurta Sets",
-    href: "/kurta-sets",
-  },
-  {
-    type: "link",
-    title: "Anarkalis",
-    href: "/anarkalis",
-  },
-  {
-    type: "link",
-    title: "Shararas",
-    href: "/shararas",
-  },
-  {
-    type: "link",
-    title: "Dresses",
-    href: "/dresses",
-  },
-  {
-    type: "dropdown",
     title: "Special",
-    items: [
+    subTitle: [
       {
         title: "Anarkalis",
         href: "/anarkalis",
@@ -94,25 +48,12 @@ const navigationData = [
       },
     ],
   },
+  { title: "Pret", href: "/pret" },
+  { title: "Fusion", href: "/fusion" },
+  { title: "Wedding", href: "/wedding" },
   {
-    type: "link",
-    title: "Pret",
-    href: "/pret",
-  },
-  {
-    type: "link",
-    title: "Fusion",
-    href: "/fusion",
-  },
-  {
-    type: "link",
-    title: "Wedding",
-    href: "/wedding",
-  },
-  {
-    type: "dropdown",
     title: "Women",
-    items: [
+    subTitle: [
       {
         title: "New Arrivals",
         href: "/new-arrivals",
@@ -128,57 +69,39 @@ const navigationData = [
         href: "/sarees",
         description: "Elegant sarees for every occasion",
       },
-      {
-        title: "Kurta Sets",
-        href: "/kurta-sets",
-        description: "Stylish kurta sets for casual and formal wear",
-      },
-      {
-        title: "Dresses",
-        href: "/dresses",
-        description: "Western and fusion dress collection",
-      },
-      {
-        title: "Pret",
-        href: "/pret",
-        description: "Ready-to-wear designer outfits",
-      },
-      {
-        title: "Fusion",
-        href: "/fusion",
-        description: "Modern fusion of traditional and contemporary styles",
-      },
     ],
     featured: {
+      image: "/image/7.png",
       title: "Women's Fashion",
       href: "/women",
       description:
         "Explore our complete collection of ethnic and contemporary wear",
     },
   },
-  {
-    type: "link",
-    title: "Ready",
-    href: "/ready-to-wear",
-  },
-  {
-    type: "link",
-    title: "Sale",
-    href: "/sale",
-  },
+  { title: "Ready", href: "/ready-to-wear" },
+  { title: "Sale", href: "/sale" },
 ];
 
 export function BottomNavigationBar() {
+  const pathname = usePathname();
+
   return (
-    <section className="bg-[#400A38] py-4">
-      <NavigationMenu className="container mx-auto">
-        <NavigationMenuList className={"flex gap-6"}>
+    <section className="bg-[#400A38]">
+      <NavigationMenu className="container mx-auto px-4 py-4">
+        <NavigationMenuList className="flex gap-6">
           {navigationData.map((item, index) => {
-            if (item.type === "dropdown") {
+            const isActive = pathname === item?.href;
+
+            if (item?.subTitle) {
               return (
                 <NavigationMenuItem key={index}>
-                  <NavigationMenuTrigger className={"text-[#CAC8CA]"}>
-                    {item.title}
+                  <NavigationMenuTrigger
+                    className={cn(
+                      "text-[#CAC8CA] hover:text-[#E60CD9] transition duration-300 cursor-pointer",
+                      isActive && "text-[#E60CD9] underline"
+                    )}
+                  >
+                    {item?.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul
@@ -188,32 +111,41 @@ export function BottomNavigationBar() {
                           : "w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[500px]"
                       }`}
                     >
-                      {item.featured && (
+                      {item?.featured && (
                         <li className="row-span-3">
                           <NavigationMenuLink asChild>
                             <Link
                               href={item.featured.href}
-                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-pink-100 to-pink-50 p-6 no-underline outline-none"
+                              className="flex h-full w-full select-none flex-col justify-end rounded-md bg-[#400A38] bg-blend-overlay bg-cover bg-center p-6 no-underline outline-none text-white"
+                              style={{
+                                backgroundImage: `url(${item.featured.image})`,
+                              }}
                             >
-                              <div className="mb-2 mt-4 text-lg font-medium">
+                              <div className="mb-2 mt-4 text-lg font-medium drop-shadow">
                                 {item.featured.title}
                               </div>
-                              <p className="text-sm leading-tight text-gray-600">
+                              <p className="text-sm leading-tight drop-shadow">
                                 {item.featured.description}
                               </p>
                             </Link>
                           </NavigationMenuLink>
                         </li>
                       )}
-                      {item.items.map((subItem, subIndex) => (
-                        <ListItem
-                          key={subIndex}
-                          title={subItem.title}
-                          href={subItem.href}
-                        >
-                          {subItem.description}
-                        </ListItem>
-                      ))}
+
+                      {item?.subTitle.map((subItem, subIndex) => {
+                        const isSubActive = pathname === subItem.href;
+
+                        return (
+                          <ListItem
+                            key={subIndex}
+                            title={subItem.title}
+                            href={subItem.href}
+                            active={isSubActive}
+                          >
+                            {subItem.description}
+                          </ListItem>
+                        );
+                      })}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -221,9 +153,14 @@ export function BottomNavigationBar() {
             } else {
               return (
                 <NavigationMenuItem key={index}>
-                  <Link href={item.href} legacyBehavior passHref>
-                    <NavigationMenuLink className={"text-[#CAC8CA]"}>
-                      {item.title}
+                  <Link href={item?.href} legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={cn(
+                        "text-[#CAC8CA] hover:text-[#E60CD9] transition duration-300",
+                        isActive && "text-[#E60CD9] underline"
+                      )}
+                    >
+                      {item?.title}
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -237,7 +174,7 @@ export function BottomNavigationBar() {
 }
 
 const ListItem = React.forwardRef(
-  ({ className, title, children, ...props }, ref) => {
+  ({ className, title, children, active, ...props }, ref) => {
     return (
       <li>
         <NavigationMenuLink asChild>
@@ -245,6 +182,7 @@ const ListItem = React.forwardRef(
             ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-pink-50 hover:text-pink-600 focus:bg-pink-50 focus:text-pink-600",
+              active && "text-[#E60CD9]",
               className
             )}
             {...props}
