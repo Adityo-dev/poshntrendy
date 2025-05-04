@@ -153,16 +153,15 @@ export function BottomNavigationBar() {
             } else {
               return (
                 <NavigationMenuItem key={index}>
-                  <Link href={item?.href} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={cn(
-                        "text-[#CAC8CA] hover:text-[#E60CD9] transition duration-300",
-                        isActive && "text-[#E60CD9] underline"
-                      )}
-                    >
-                      {item?.title}
-                    </NavigationMenuLink>
-                  </Link>
+                  <NavigationMenuLink
+                    className={cn(
+                      "text-[#CAC8CA] hover:text-[#E60CD9] transition duration-300",
+                      isActive && "text-[#E60CD9] underline"
+                    )}
+                    asChild
+                  >
+                    <Link href={item?.href}>{item?.title}</Link>
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
               );
             }

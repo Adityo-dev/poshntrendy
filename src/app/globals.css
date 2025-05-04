@@ -22,9 +22,9 @@
   }
 } */
 
-body {
-  background: #fbf5fb;
-}
+/* body {
+  background: #fbf9fb;
+} */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
