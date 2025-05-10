@@ -152,7 +152,7 @@ export default function Home() {
         products={data}
       />
       <CollectionShowcase
-        title={"For Spring Weddings"}
+        title={"Designer On Discount"}
         products={data}
         showProducts={6}
         isSimpleSlider={true}
