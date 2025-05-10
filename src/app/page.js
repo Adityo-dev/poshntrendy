@@ -1,5 +1,6 @@
 import CollectionShowcase from "@/components/collectionShowcase/CollectionShowcase";
 import Brand from "@/components/modules/home/brand/Brand";
+import Categories from "@/components/modules/home/categories/Categories";
 import Hero from "@/components/modules/home/hero/Hero";
 const data = [
   {
@@ -144,20 +145,20 @@ export default function Home() {
     <main>
       <Hero />
       <Brand />
-      {/* <HomePageBanner1 /> */}
+      <Categories />
       <CollectionShowcase
         bgColor="#FBF9FB"
         title={"Wedding Tales"}
         products={data}
       />
       <CollectionShowcase
-        title={"Shop By Categories"}
+        title={"For Spring Weddings"}
         products={data}
         showProducts={6}
         isSimpleSlider={true}
         compoName={"ShopByCategories"}
       />
-      <CollectionShowcase
+      {/* <CollectionShowcase
         bgColor="#FBF9FB"
         title={"Designer On Discount"}
         products={data}
@@ -198,7 +199,7 @@ export default function Home() {
         products={data}
         isSimpleSlider={true}
         compoName={"UpcomingAndOngoingEvents"}
-      />
+      /> */}
     </main>
   );
 }

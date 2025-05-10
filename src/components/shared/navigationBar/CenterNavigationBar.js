@@ -1,8 +1,8 @@
 // import lucide icons
 import { Heart, ShoppingCart, User } from "lucide-react";
 // import components
-import SearchBar from "./SearchBar";
 import Image from "next/image";
+import SearchBar from "./SearchBar";
 
 function CenterNavigationBar() {
   return (
