@@ -5,13 +5,13 @@ import Link from "next/link";
 const categories = [
   {
     id: 1,
-    image: "/image/product1.png",
+    image: "/image/product1.avif",
     title: "WOMEN",
     url: "#",
   },
   {
     id: 2,
-    image: "/image/product2.png",
+    image: "/image/kids.jpg",
     title: "KIDS",
     url: "#",
   },
@@ -23,7 +23,7 @@ const categories = [
   },
   {
     id: 4,
-    image: "/image/product4.png",
+    image: "/image/product1.png",
     title: "UPCOMING",
     url: "#",
   },
