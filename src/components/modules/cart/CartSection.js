@@ -5,7 +5,7 @@ import PolicyNotice from "./PolicyNotice";
 
 function CartSection() {
   return (
-    <div className="container mx-auto grid grid-cols-12 gap-8 mt-12 pb-24">
+    <div className="container mx-auto px-4 grid grid-cols-12 gap-8 mt-12 pb-24">
       <div className="col-span-7">
         <Card />
         <PaymentMethods />
