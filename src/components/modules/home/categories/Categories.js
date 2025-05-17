@@ -27,12 +27,12 @@ const categories = [
     title: "UPCOMING",
     url: "#",
   },
-  //   {
-  //     id: 5,
-  //     image: "/image/product2.png",
-  //     title: "SALE",
-  //     url: "#",
-  //   },
+  {
+    id: 5,
+    image: "/image/product2.png",
+    title: "SALE",
+    url: "#",
+  },
 ];
 
 function Categories() {
@@ -50,7 +50,7 @@ function Categories() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {categories.map((cate) => (
           <Link
             href={cate?.url}
@@ -62,7 +62,7 @@ function Categories() {
               width={400}
               height={400}
               alt={cate?.title}
-              className="w-full h-[470px] object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-[420px] object-cover transition-transform duration-300 group-hover:scale-110"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent py-10 text-white text-center">
               <p className="text-xl font-semibold">{cate?.title}</p>

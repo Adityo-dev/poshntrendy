@@ -2,7 +2,26 @@
 import { Heart, ShoppingCart, User } from "lucide-react";
 // import components
 import Image from "next/image";
+import Link from "next/link";
 import SearchBar from "./SearchBar";
+
+const rightSide = [
+  {
+    id: 1,
+    icon: <Heart size={24} />,
+    url: "/wishlist",
+  },
+  {
+    id: 2,
+    icon: <ShoppingCart size={24} />,
+    url: "/cart",
+  },
+  {
+    id: 3,
+    icon: <User size={24} />,
+    url: "/user",
+  },
+];
 
 function CenterNavigationBar() {
   return (
@@ -26,9 +45,11 @@ function CenterNavigationBar() {
 
         {/* Right Side Icons */}
         <div className="flex items-center gap-4 text-[#3C0A39]">
-          <Heart size={22} />
-          <ShoppingCart size={22} />
-          <User size={22} />
+          {rightSide.map((data) => (
+            <Link href={data?.url} key={data?.id}>
+              {data?.icon}
+            </Link>
+          ))}
         </div>
       </div>
     </header>

@@ -1,9 +1,5 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +8,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import * as React from "react";
 
 const navigationData = [
   { title: "Home", href: "/" },
@@ -87,7 +87,7 @@ export function BottomNavigationBar() {
 
   return (
     <section className="bg-[#400A38]">
-      <NavigationMenu className="container mx-auto px-4 py-4">
+      <NavigationMenu className="container mx-auto px-4 py-4 flex items-center justify-center">
         <NavigationMenuList className="flex gap-6">
           {navigationData.map((item, index) => {
             const isActive = pathname === item?.href;

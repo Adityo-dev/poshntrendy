@@ -4,13 +4,15 @@ import Link from "next/link";
 function ProductCard({ product }) {
   return (
     <div className="group w-full max-h-[680px] bg-[#FEFEFE] border-2 hover:border-[#E60CD9] rounded-[12px] transition-all duration-300 overflow-hidden">
-      <Image
-        src={product?.image}
-        width={600}
-        height={600}
-        alt=""
-        className="w-full h-[560px] object-fill"
-      />
+      <Link href={`/products/${product?.title}`}>
+        <Image
+          src={product?.image}
+          width={600}
+          height={600}
+          alt=""
+          className="w-full h-[560px] object-fill"
+        />
+      </Link>
       <div className=" relative p-4">
         <p className="flex items-center space-x-1 text-yellow-500">
           {Array.from({ length: 5 }, (_, i) => {
@@ -42,7 +44,7 @@ function ProductCard({ product }) {
           )}
         </div>
         <Link
-          href={product?.url}
+          href={`/products/${product?.title}`}
           style={{ borderRadius: "32px 0px 12px 0px" }}
           className="absolute right-0 bottom-0 w-44 h-11 flex items-center justify-center group-hover:bg-[#E60CD9] bg-[#F0D4EC] group-hover:text-[#FBF9FB] text-[#605F5F] text-lg transition-all duration-300"
         >

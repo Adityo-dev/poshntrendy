@@ -1,5 +1,4 @@
 import CollectionShowcase from "@/components/collectionShowcase/CollectionShowcase";
-import Brand from "@/components/modules/home/brand/Brand";
 import Categories from "@/components/modules/home/categories/Categories";
 import Hero from "@/components/modules/home/hero/Hero";
 const data = [
@@ -144,7 +143,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Brand />
+      {/* <Brand /> */}
       <Categories />
       <CollectionShowcase
         bgColor="#FBF9FB"

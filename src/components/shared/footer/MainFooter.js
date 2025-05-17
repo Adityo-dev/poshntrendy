@@ -1,9 +1,13 @@
-function MainFooter() {
+import CopyRights from "./CopyRights";
+import Features from "./Features";
+import FooterLink from "./FooterLink";
+
+export default function Banner() {
   return (
-    <div>
-      <h1>Main Footer</h1>
-    </div>
+    <footer className="bg-[#FFE5EC] mt-12">
+      <Features />
+      <FooterLink />
+      <CopyRights />
+    </footer>
   );
 }
-
-export default MainFooter;
