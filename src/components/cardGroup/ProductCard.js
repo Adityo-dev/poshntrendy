@@ -30,7 +30,7 @@ function ProductCard({ product }) {
         <p className="text-[#0D0C0D] text-lg font-semibold leading-7">
           {product?.title}
         </p>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           {product.discount > 0 && (
             <p className="text-[#CAC8CA] text-2xl leading-9 line-through">
               ${Math.round(product.price / (1 - product.discount / 100))}

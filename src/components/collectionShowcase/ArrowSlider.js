@@ -30,7 +30,7 @@ const ArrowSlider = ({
     <section className="w-full relative">
       {/* Left Arrow */}
       <button
-        className={`absolute top-1/2 -left-6 transform -translate-y-1/2 z-10 custom-${compoName}-button-prev 
+        className={`absolute top-1/2 -left-4 transform -translate-y-1/2 z-10 custom-${compoName}-button-prev 
             ${
               isAtStart
                 ? "bg-[#CAC8CA] text-[#FBF9FB]"
@@ -77,7 +77,7 @@ const ArrowSlider = ({
 
       {/* Right Arrow */}
       <button
-        className={`absolute top-1/2 -right-6 transform -translate-y-1/2 z-10 custom-${compoName}-button-next 
+        className={`absolute top-1/2 -right-4 transform -translate-y-1/2 z-10 custom-${compoName}-button-next 
             ${
               isAtEnd
                 ? "bg-[#CAC8CA] text-[#FBF9FB]"

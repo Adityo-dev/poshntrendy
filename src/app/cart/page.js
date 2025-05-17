@@ -3,7 +3,7 @@ import CartSection from "@/components/modules/cart/CartSection";
 const data = [
   {
     id: 1,
-    image: "/image/product1.png",
+    image: "/image/product1.jpg",
     title: "AWIGNA by Warsha & Rittu",
     price: 471,
     discount: 0,
@@ -12,7 +12,7 @@ const data = [
   },
   {
     id: 2,
-    image: "/image/product2.png",
+    image: "/image/product2.jpg",
     title: "Golden Glam Lehenga",
     price: 432,
     discount: 0,
@@ -21,7 +21,7 @@ const data = [
   },
   {
     id: 3,
-    image: "/image/product3.png",
+    image: "/image/product3.jpg",
     title: "Royal Red Bridal Set",
     price: 468,
     discount: 10,
@@ -30,7 +30,7 @@ const data = [
   },
   {
     id: 4,
-    image: "/image/product4.png",
+    image: "/image/product4.jpg",
     title: "Peach Elegance Embroidery",
     price: 414,
     discount: 10,
@@ -39,7 +39,7 @@ const data = [
   },
   {
     id: 5,
-    image: "/image/product1.png",
+    image: "/image/product1.jpg",
     title: "Maroon Net Bridal Wear",
     price: 468,
     discount: 10,
@@ -48,7 +48,7 @@ const data = [
   },
   {
     id: 6,
-    image: "/image/product1.png",
+    image: "/image/product1.jpg",
     title: "Ivory Dream Lehenga",
     price: 441,
     discount: 10,

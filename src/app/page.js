@@ -1,10 +1,10 @@
 import CollectionShowcase from "@/components/collectionShowcase/CollectionShowcase";
 import Categories from "@/components/modules/home/categories/Categories";
 import Hero from "@/components/modules/home/hero/Hero";
-const data = [
+const designerOnDiscount = [
   {
     id: 1,
-    image: "/image/product1.png",
+    image: "/image/product1.jpg",
     title: "AWIGNA by Warsha & Rittu",
     price: 471,
     discount: 0,
@@ -13,7 +13,7 @@ const data = [
   },
   {
     id: 2,
-    image: "/image/product2.png",
+    image: "/image/product2.jpg",
     title: "Golden Glam Lehenga",
     price: 432,
     discount: 0,
@@ -22,7 +22,7 @@ const data = [
   },
   {
     id: 3,
-    image: "/image/product3.png",
+    image: "/image/product3.jpg",
     title: "Royal Red Bridal Set",
     price: 468,
     discount: 10,
@@ -31,7 +31,7 @@ const data = [
   },
   {
     id: 4,
-    image: "/image/product4.png",
+    image: "/image/product4.jpg",
     title: "Peach Elegance Embroidery",
     price: 414,
     discount: 10,
@@ -40,7 +40,7 @@ const data = [
   },
   {
     id: 5,
-    image: "/image/product1.png",
+    image: "/image/product5.jpg",
     title: "Maroon Net Bridal Wear",
     price: 468,
     discount: 10,
@@ -49,7 +49,7 @@ const data = [
   },
   {
     id: 6,
-    image: "/image/product1.png",
+    image: "/image/product6.jpg",
     title: "Ivory Dream Lehenga",
     price: 441,
     discount: 10,
@@ -58,7 +58,7 @@ const data = [
   },
   {
     id: 7,
-    image: "/image/product1.png",
+    image: "/image/product7.jpg",
     title: "Navy Blue Mirror Work",
     price: 495,
     discount: 10,
@@ -67,7 +67,7 @@ const data = [
   },
   {
     id: 8,
-    image: "/image/product1.png",
+    image: "/image/product8.jpg",
     title: "Silver Zari Embroidered Set",
     price: 427,
     discount: 10,
@@ -76,7 +76,7 @@ const data = [
   },
   {
     id: 9,
-    image: "/image/product1.png",
+    image: "/image/product9.jpg",
     title: "Mustard Silk Festive Wear",
     price: 396,
     discount: 10,
@@ -85,7 +85,7 @@ const data = [
   },
   {
     id: 10,
-    image: "/image/product1.png",
+    image: "/image/product10.jpg",
     title: "Emerald Green Luxury Look",
     price: 477,
     discount: 10,
@@ -94,7 +94,7 @@ const data = [
   },
   {
     id: 11,
-    image: "/image/product1.png",
+    image: "/image/product11.jpg",
     title: "Velvet Red Wedding Wear",
     price: 540,
     discount: 10,
@@ -112,7 +112,7 @@ const data = [
   },
   {
     id: 13,
-    image: "/image/product1.png",
+    image: "/image/product2.png",
     title: "Champagne Designer Lehenga",
     price: 459,
     discount: 10,
@@ -121,7 +121,7 @@ const data = [
   },
   {
     id: 14,
-    image: "/image/product1.png",
+    image: "/image/product3.png",
     title: "Satin Rose Embroidered Dress",
     price: 477,
     discount: 10,
@@ -130,12 +130,68 @@ const data = [
   },
   {
     id: 15,
-    image: "/image/product1.png",
+    image: "/image/product4.png",
     title: "Designer Net Bridal Lehenga",
     price: 495,
     discount: 10,
     rating: 5.0,
     url: "designer-net-bridal-lehenga",
+  },
+];
+const weddingTales = [
+  {
+    id: 1,
+    image: "/image/product11.jpg",
+    title: "AWIGNA by Warsha & Rittu",
+    price: 471,
+    discount: 0,
+    rating: 5,
+    url: "awigna-by-warsha-ritt",
+  },
+  {
+    id: 2,
+    image: "/image/product10.jpg",
+    title: "Golden Glam Lehenga",
+    price: 432,
+    discount: 0,
+    rating: 4.9,
+    url: "golden-glam-lehenga",
+  },
+  {
+    id: 3,
+    image: "/image/product9.jpg",
+    title: "Royal Red Bridal Set",
+    price: 468,
+    discount: 10,
+    rating: 4.8,
+    url: "royal-red-bridal-set",
+  },
+  {
+    id: 4,
+    image: "/image/product3.jpg",
+    title: "Peach Elegance Embroidery",
+    price: 414,
+    discount: 10,
+    rating: 4.7,
+    url: "peach-elegance-embroidery",
+  },
+  {
+    id: 5,
+    image: "/image/product7.jpg",
+    title: "Maroon Net Bridal Wear",
+    price: 468,
+    discount: 10,
+    rating: 4.9,
+    url: "maroon-net-bridal-wear",
+  },
+  {
+    id: 6,
+    image: "/image/product6.jpg",
+    title: "Ivory Dream Lehenga",
+    price: 441,
+    discount: 10,
+    rating: 4.8,
+    url: "ivory-dream-lehenga",
   },
 ];
 
@@ -148,12 +204,12 @@ export default function Home() {
       <CollectionShowcase
         bgColor="#FBF9FB"
         title={"Wedding Tales"}
-        products={data}
+        showProducts={6}
+        products={weddingTales}
       />
       <CollectionShowcase
         title={"Designer On Discount"}
-        products={data}
-        showProducts={6}
+        products={designerOnDiscount}
         isSimpleSlider={true}
         compoName={"ShopByCategories"}
       />

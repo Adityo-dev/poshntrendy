@@ -17,19 +17,19 @@ const categories = [
   },
   {
     id: 3,
-    image: "/image/product3.png",
+    image: "/image/product2.jpg",
     title: "MEN",
     url: "#",
   },
   {
     id: 4,
-    image: "/image/product1.png",
+    image: "/image/product11.jpg",
     title: "UPCOMING",
     url: "#",
   },
   {
     id: 5,
-    image: "/image/product2.png",
+    image: "/image/product7.jpg",
     title: "SALE",
     url: "#",
   },
