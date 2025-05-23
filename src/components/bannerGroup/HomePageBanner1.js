@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function HomePageBanner1() {
   return (
-    <section className="bg-[#FBF9FB]">
+    <section className="bg-primary-foreground">
       <div className="container mx-auto px-4 flex items-center gap-7 py-24">
         <Image
           src={"/image/HomePageBanner1.1.png"}

@@ -394,7 +394,7 @@ export default function ShopPageClient() {
             <div className="absolute w-full h-2 bg-gray-200 rounded"></div>
             {/* Filled range between min and max */}
             <div
-              className="absolute h-2 bg-[#E60CD9] rounded"
+              className="absolute h-2 bg-primary rounded"
               style={{
                 left: `${
                   ((priceRange[0] - minPrice) / (maxPrice - minPrice)) * 100
@@ -570,8 +570,8 @@ export default function ShopPageClient() {
                     onClick={() => handlePageChange(page)}
                     className={`px-3 py-1 rounded cursor-pointer transition-all duration-200 ${
                       currentPage === page
-                        ? "bg-[#E60CD9] text-white"
-                        : "bg-[#DBCCCC] hover:bg-[#E60CD9] hover:text-white"
+                        ? "bg-primary text-white"
+                        : "bg-[#DBCCCC] hover:bg-primary hover:text-white"
                     }`}
                   >
                     {page}

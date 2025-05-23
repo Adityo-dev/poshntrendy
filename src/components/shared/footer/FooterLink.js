@@ -118,7 +118,7 @@ function FooterLink() {
                   <div key={menu?.id} className="py-1.5">
                     <Link
                       href={menu?.url}
-                      className="text-sm font-medium hover:text-[#E60CD9] hover:underline transition-colors duration-200"
+                      className="text-sm font-medium hover:text-primary hover:underline transition-colors duration-200"
                     >
                       {menu?.name}
                     </Link>

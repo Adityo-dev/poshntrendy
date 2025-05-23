@@ -41,7 +41,7 @@ function CollectionShowcase({
             </Link>
             {/* <Link
               href={viewAllLink}
-              className="w-36 h-10 border-2 border-[#E60CD9] flex items-center justify-center rounded-full text-[#A5A5A5] text-lg"
+              className="w-36 h-10 border-2 border-primary flex items-center justify-center rounded-full text-[#A5A5A5] text-lg"
             >
               {viewAllText}
             </Link> */}
