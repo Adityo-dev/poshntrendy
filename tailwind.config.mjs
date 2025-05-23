@@ -50,6 +50,9 @@ export default {
           5: "var(--chart-5)",
         },
       },
+      backgroundImage: {
+        "peach-pink-gradient": "linear-gradient(to right, #FBD7E5, #FFD7AC)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
