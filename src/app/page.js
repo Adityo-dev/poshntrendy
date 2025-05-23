@@ -1,101 +1,231 @@
-import Image from "next/image";
+import CollectionShowcase from "@/components/collectionShowcase/CollectionShowcase";
+import Categories from "@/components/modules/home/Categories";
+import Hero from "@/components/modules/home/hero/Hero";
+
+const designerOnDiscount = [
+  {
+    id: 1,
+    image: "/image/product1.jpg",
+    title: "AWIGNA by Warsha & Rittu",
+    price: 471,
+    discount: 0,
+    rating: 5,
+    url: "awigna-by-warsha-ritt",
+  },
+  {
+    id: 2,
+    image: "/image/product2.jpg",
+    title: "Golden Glam Lehenga",
+    price: 432,
+    discount: 0,
+    rating: 4.9,
+    url: "golden-glam-lehenga",
+  },
+  {
+    id: 3,
+    image: "/image/product3.jpg",
+    title: "Royal Red Bridal Set",
+    price: 468,
+    discount: 10,
+    rating: 4.8,
+    url: "royal-red-bridal-set",
+  },
+  {
+    id: 4,
+    image: "/image/product4.jpg",
+    title: "Peach Elegance Embroidery",
+    price: 414,
+    discount: 10,
+    rating: 4.7,
+    url: "peach-elegance-embroidery",
+  },
+  {
+    id: 5,
+    image: "/image/product5.jpg",
+    title: "Maroon Net Bridal Wear",
+    price: 468,
+    discount: 10,
+    rating: 4.9,
+    url: "maroon-net-bridal-wear",
+  },
+  {
+    id: 6,
+    image: "/image/product6.jpg",
+    title: "Ivory Dream Lehenga",
+    price: 441,
+    discount: 10,
+    rating: 4.8,
+    url: "ivory-dream-lehenga",
+  },
+  {
+    id: 7,
+    image: "/image/product7.jpg",
+    title: "Navy Blue Mirror Work",
+    price: 495,
+    discount: 10,
+    rating: 4.7,
+    url: "navy-blue-mirror-work",
+  },
+  {
+    id: 8,
+    image: "/image/product8.jpg",
+    title: "Silver Zari Embroidered Set",
+    price: 427,
+    discount: 10,
+    rating: 4.6,
+    url: "silver-zari-embroidered-set",
+  },
+  {
+    id: 9,
+    image: "/image/product9.jpg",
+    title: "Mustard Silk Festive Wear",
+    price: 396,
+    discount: 10,
+    rating: 4.5,
+    url: "mustard-silk-festive-wear",
+  },
+  {
+    id: 10,
+    image: "/image/product10.jpg",
+    title: "Emerald Green Luxury Look",
+    price: 477,
+    discount: 10,
+    rating: 4.9,
+    url: "emerald-green-luxury-look",
+  },
+  {
+    id: 11,
+    image: "/image/product11.jpg",
+    title: "Velvet Red Wedding Wear",
+    price: 540,
+    discount: 10,
+    rating: 4.8,
+    url: "velvet-red-wedding-wear",
+  },
+  {
+    id: 12,
+    image: "/image/product1.png",
+    title: "Pastel Peach Bridal Set",
+    price: 405,
+    discount: 10,
+    rating: 4.7,
+    url: "pastel-peach-bridal-set",
+  },
+  {
+    id: 13,
+    image: "/image/product2.png",
+    title: "Champagne Designer Lehenga",
+    price: 459,
+    discount: 10,
+    rating: 4.6,
+    url: "champagne-designer-lehenga",
+  },
+  {
+    id: 14,
+    image: "/image/product3.png",
+    title: "Satin Rose Embroidered Dress",
+    price: 477,
+    discount: 10,
+    rating: 4.9,
+    url: "satin-rose-embroidered-dress",
+  },
+  {
+    id: 15,
+    image: "/image/product4.png",
+    title: "Designer Net Bridal Lehenga",
+    price: 495,
+    discount: 10,
+    rating: 5.0,
+    url: "designer-net-bridal-lehenga",
+  },
+];
+
+const weddingTales = [
+  {
+    id: 1,
+    image: "/image/product11.jpg",
+    title: "AWIGNA by Warsha & Rittu",
+    price: 471,
+    discount: 0,
+    rating: 5,
+    url: "awigna-by-warsha-ritt",
+  },
+  {
+    id: 2,
+    image: "/image/product10.jpg",
+    title: "Golden Glam Lehenga",
+    price: 432,
+    discount: 0,
+    rating: 4.9,
+    url: "golden-glam-lehenga",
+  },
+  {
+    id: 3,
+    image: "/image/product9.jpg",
+    title: "Royal Red Bridal Set",
+    price: 468,
+    discount: 10,
+    rating: 4.8,
+    url: "royal-red-bridal-set",
+  },
+  {
+    id: 4,
+    image: "/image/product3.jpg",
+    title: "Peach Elegance Embroidery",
+    price: 414,
+    discount: 10,
+    rating: 4.7,
+    url: "peach-elegance-embroidery",
+  },
+  {
+    id: 5,
+    image: "/image/product7.jpg",
+    title: "Maroon Net Bridal Wear",
+    price: 468,
+    discount: 10,
+    rating: 4.9,
+    url: "maroon-net-bridal-wear",
+  },
+  {
+    id: 6,
+    image: "/image/product6.jpg",
+    title: "Ivory Dream Lehenga",
+    price: 441,
+    discount: 10,
+    rating: 4.8,
+    url: "ivory-dream-lehenga",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <main>
+      <Hero />
+      <Categories />
+      <CollectionShowcase
+        bgColor={"#ffd7ad"}
+        title={"new arrivals"}
+        description={
+          "Blending the richness of tradition with the innovation of modernity creates a unique tapestry where the past and present coexist in perfect harmony. In every corner of design, culture, fashion, and architecture."
+        }
+        products={designerOnDiscount}
+        isSimpleSlider={true}
+        compoName={"newArrivals"}
+      />
+      {/* BEST SELLERS */}
+      <CollectionShowcase
+        bgColor="#FBF9FB"
+        title={"festive collections"}
+        showProducts={6}
+        products={weddingTales}
+      />
+      {/* <ClientStories /> */}
+      <CollectionShowcase
+        title={"sales ongoing"}
+        showProducts={6}
+        products={weddingTales}
+      />
+      {/* BRANDS */}
+    </main>
   );
 }
