@@ -201,7 +201,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Categories />
+      {/* <Categories /> */}
       <CollectionShowcase
         bgColor={"#ffd7ad"}
         title={"new arrivals"}
