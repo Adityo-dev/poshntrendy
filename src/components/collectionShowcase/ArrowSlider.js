@@ -33,8 +33,8 @@ const ArrowSlider = ({
         className={`absolute top-1/2 -left-4 transform -translate-y-1/2 z-10 custom-${compoName}-button-prev 
             ${
               isAtStart
-                ? "bg-[#CAC8CA] text-[#FBF9FB]"
-                : "bg-[#E60CD9] text-[#FBF9FB]"
+                ? "bg-[#CAC8CA] text-primary-foreground"
+                : "bg-primary text-primary-foreground"
             } 
             ${customButtonStyles}`}
       >
@@ -80,8 +80,8 @@ const ArrowSlider = ({
         className={`absolute top-1/2 -right-4 transform -translate-y-1/2 z-10 custom-${compoName}-button-next 
             ${
               isAtEnd
-                ? "bg-[#CAC8CA] text-[#FBF9FB]"
-                : "bg-[#E60CD9] text-[#FBF9FB]"
+                ? "bg-[#CAC8CA] text-primary-foreground"
+                : "bg-primary text-primary-foreground"
             } 
             ${customButtonStyles}`}
       >

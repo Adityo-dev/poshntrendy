@@ -123,7 +123,7 @@ const similarProducts = [
 function ProductSinglePage() {
   return (
     <>
-      <section className="bg-[#FFE5EC] min-h-screen pb-24">
+      <section className="bg-[#FFE5EC] min-h-screen pb-16">
         <div className="container mx-auto px-4 py-12 grid grid-cols-12 gap-10 items-start">
           <div className="col-span-7">
             <ProductImages images={images} />

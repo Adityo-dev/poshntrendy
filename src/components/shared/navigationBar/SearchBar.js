@@ -1,6 +1,6 @@
 function SearchBar() {
   return (
-    <div className="w-full h-[45px] flex rounded-full border border-[#E60CD9] bg-[#F4E9F3] overflow-hidden ">
+    <div className="w-full h-[45px] flex rounded-full border border-primary bg-[#F4E9F3] overflow-hidden ">
       <input
         type="text"
         placeholder="Search product......."

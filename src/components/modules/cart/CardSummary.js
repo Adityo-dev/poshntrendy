@@ -4,7 +4,7 @@ import TotalPayable from "./TotalPayable";
 
 function CardSummary() {
   return (
-    <div className="w-full border border-[#E60CD9] p-6 rounded-lg">
+    <div className="w-full border border-primary p-6 rounded-lg">
       {/* Cart Summary Header */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold border-b pb-2 mb-4">
