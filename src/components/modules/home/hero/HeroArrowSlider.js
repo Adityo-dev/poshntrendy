@@ -56,8 +56,8 @@ function HeroArrowSlider({ categoryData }) {
       {/* Custom Arrows */}
       <button
         className={`hero-button-prev opacity-0 group-hover:opacity-100 transition-all duration-300 absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 ${
-          isAtStart ? "bg-[#CAC8CA]" : "bg-[#E60CD9]"
-        } text-[#FBF9FB] rounded-md flex items-center justify-center cursor-pointer z-10 shadow-md hover:scale-105 transform transition-transform`}
+          isAtStart ? "bg-[#CAC8CA]" : "bg-primary"
+        } text-primary-foreground rounded-md flex items-center justify-center cursor-pointer z-10 shadow-md hover:scale-105 transform transition-transform`}
         disabled={isAtStart}
         aria-label="Previous slide"
       >
@@ -65,8 +65,8 @@ function HeroArrowSlider({ categoryData }) {
       </button>
       <button
         className={`hero-button-next opacity-0 group-hover:opacity-100 transition-all duration-300 absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 ${
-          isAtEnd ? "bg-[#CAC8CA]" : "bg-[#E60CD9]"
-        } text-[#FBF9FB] rounded-md flex items-center justify-center cursor-pointer z-10 shadow-md hover:scale-105 transform transition-transform`}
+          isAtEnd ? "bg-[#CAC8CA]" : "bg-primary"
+        } text-primary-foreground rounded-md flex items-center justify-center cursor-pointer z-10 shadow-md hover:scale-105 transform transition-transform`}
         disabled={isAtEnd}
         aria-label="Next slide"
       >

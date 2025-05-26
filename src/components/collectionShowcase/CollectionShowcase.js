@@ -4,10 +4,11 @@ import ArrowSlider from "./ArrowSlider";
 
 function CollectionShowcase({
   bgColor,
+  isGradient,
   title,
   description,
-  viewAllLink = "/",
-  viewAllText = "View All",
+  viewBtnLink = "/",
+  viewBtnText = "View All",
   products,
   showProducts = 3,
   isSimpleSlider,
@@ -20,6 +21,7 @@ function CollectionShowcase({
         style={{
           backgroundColor: bgColor,
         }}
+        className={isGradient}
       >
         <div className="container mx-auto px-4 py-16">
           <div className="flex justify-between items-center mb-12">
@@ -34,17 +36,15 @@ function CollectionShowcase({
               )}
             </div>
             <Link
-              href={"viewAllLink"}
-              className="text-[#A5A5A5] text-lg flex items-center gap-2"
+              href={viewBtnLink}
+              className={`w-36 h-10 border-2 border-primary flex items-center justify-center rounded-full ${
+                isGradient
+                  ? "bg-primary text-primary-foreground"
+                  : "text-[#A5A5A5]"
+              } text-lg`}
             >
-              VIEW ALL
+              {viewBtnText}
             </Link>
-            {/* <Link
-              href={viewAllLink}
-              className="w-36 h-10 border-2 border-[#E60CD9] flex items-center justify-center rounded-full text-[#A5A5A5] text-lg"
-            >
-              {viewAllText}
-            </Link> */}
           </div>
           {isSimpleSlider ? (
             <ArrowSlider sliderData={products} compoName={compoName} />

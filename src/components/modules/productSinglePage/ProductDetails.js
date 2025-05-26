@@ -33,7 +33,7 @@ function ProductDetails() {
       <p className="text-[#605F5F] text-lg leading-[26px] mb-2">
         Peacock Red phulkari printed jumpsuit
       </p>
-      <p className="text-[#E60CD9] text-3xl font-bold mb-4">$490</p>
+      <p className="text-primary text-3xl font-bold mb-4">$490</p>
 
       {/* Size selection And Action Buttons */}
       <div className="py-4 border-y border-[#605F5F]">
@@ -55,10 +55,10 @@ function ProductDetails() {
         </div>
 
         <div className="flex gap-4 mb-2">
-          <button className="flex-1 py-3 bg-[#E60CD9] text-[#FBF9FB] text-lg rounded-full hover:opacity-90 transition cursor-pointer">
+          <button className="flex-1 py-3 bg-primary text-primary-foreground text-lg rounded-full hover:opacity-90 transition cursor-pointer">
             Shop now
           </button>
-          <button className="flex-1 py-3 border border-[#E60CD9] text-[#0D0C0D] text-lg rounded-full hover:bg-[#E60CD9] hover:text-[#FBF9FB] transition duration-300 cursor-pointer">
+          <button className="flex-1 py-3 border border-primary text-[#0D0C0D] text-lg rounded-full hover:bg-primary hover:text-primary-foreground transition duration-300 cursor-pointer">
             Add To Cart
           </button>
         </div>

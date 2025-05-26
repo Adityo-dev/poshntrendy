@@ -7,10 +7,10 @@ function TotalPayable() {
       </div>
 
       <div className="mt-6 space-y-4">
-        <button className="w-full bg-[#E60CD9] hover:bg-[#C50ABF] text-[#FBF9FB] py-3 rounded-md text-lg font-medium cursor-pointer">
+        <button className="w-full bg-primary hover:bg-[#C50ABF] text-primary-foreground py-3 rounded-md text-lg font-medium cursor-pointer">
           Proceed To Checkout
         </button>
-        <button className="w-full border border-[#E60CD9] text-[#E60CD9] hover:bg-[#FDF0FD] py-3 rounded-md text-lg font-medium cursor-pointer">
+        <button className="w-full border border-primary text-primary hover:bg-[#FDF0FD] py-3 rounded-md text-lg font-medium cursor-pointer">
           Continue Shopping
         </button>
       </div>

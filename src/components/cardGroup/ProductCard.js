@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function ProductCard({ product }) {
   return (
-    <div className="group w-full max-h-[680px] bg-[#FEFEFE] border-2 hover:border-[#E60CD9] rounded-[12px] transition-all duration-300 overflow-hidden">
+    <div className="group w-full max-h-[680px] bg-[#FEFEFE] border-2 hover:border-primary rounded-[12px] transition-all duration-300 overflow-hidden">
       <Link href={`/products/${product?.title}`}>
         <Image
           src={product?.image}
@@ -36,9 +36,9 @@ function ProductCard({ product }) {
               ${Math.round(product.price / (1 - product.discount / 100))}
             </p>
           )}
-          <p className="text-[#E60CD9] text-2xl leading-9">${product.price}</p>
+          <p className="text-primary text-2xl leading-9">${product.price}</p>
           {product.discount > 0 && (
-            <p className="text-[#E60CD9] text-lg leading-7">
+            <p className="text-primary text-lg leading-7">
               {product.discount}% off
             </p>
           )}
@@ -46,7 +46,7 @@ function ProductCard({ product }) {
         <Link
           href={`/products/${product?.title}?=ss`}
           style={{ borderRadius: "32px 0px 12px 0px" }}
-          className="absolute right-0 bottom-0 w-44 h-11 flex items-center justify-center group-hover:bg-[#E60CD9] bg-[#F0D4EC] group-hover:text-[#FBF9FB] text-[#605F5F] text-lg transition-all duration-300"
+          className="absolute right-0 bottom-0 w-44 h-11 flex items-center justify-center group-hover:bg-primary bg-[#F0D4EC] group-hover:text-primary-foreground text-[#605F5F] text-lg transition-all duration-300"
         >
           Shop now
         </Link>
