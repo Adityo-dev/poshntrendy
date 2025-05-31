@@ -56,6 +56,7 @@ const data = [
     url: "ivory-dream-lehenga",
   },
 ];
+
 function Cart() {
   return (
     <section>

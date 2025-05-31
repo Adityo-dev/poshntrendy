@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Card() {
   return (
-    <div className="border border-primary rounded-lg p-6 flex gap-6">
+    <div className="border border-[#E60CD9] rounded-lg p-6 flex gap-6">
       <Image
         src="/image/product1.png"
         width={400}

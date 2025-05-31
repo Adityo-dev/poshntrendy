@@ -23,7 +23,7 @@ export default function CustomerInfo() {
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-        <span className="w-10 h-10 flex items-center justify-center border border-primary rounded-full text-primary font-bold">
+        <span className="w-10 h-10 flex items-center justify-center border border-[#E60CD9] rounded-full text-[#E60CD9] font-bold">
           1
         </span>
         Add Your Shipping & Billing Info
@@ -36,7 +36,7 @@ export default function CustomerInfo() {
           placeholder="Full Name"
           value={formData.name}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         <input
           name="email"
@@ -44,7 +44,7 @@ export default function CustomerInfo() {
           placeholder="Email Address"
           value={formData.email}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         <input
           name="phone"
@@ -52,7 +52,7 @@ export default function CustomerInfo() {
           placeholder="Phone Number"
           value={formData.phone}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         <input
           name="address"
@@ -60,7 +60,7 @@ export default function CustomerInfo() {
           placeholder="Street Address"
           value={formData.address}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         <input
           name="city"
@@ -68,7 +68,7 @@ export default function CustomerInfo() {
           placeholder="City"
           value={formData.city}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         <input
           name="state"
@@ -76,7 +76,7 @@ export default function CustomerInfo() {
           placeholder="State/Province"
           value={formData.state}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         <input
           name="zipCode"
@@ -84,7 +84,7 @@ export default function CustomerInfo() {
           placeholder="Zip/Postal Code"
           value={formData.zipCode}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         <input
           name="country"
@@ -92,7 +92,7 @@ export default function CustomerInfo() {
           placeholder="Country"
           value={formData.country}
           onChange={handleChange}
-          className="border border-primary px-4 py-2 rounded-md outline-none"
+          className="border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
       </div>
     </div>

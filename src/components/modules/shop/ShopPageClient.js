@@ -1,10 +1,16 @@
 "use client";
 
 import ProductCard from "@/components/cardGroup/ProductCard";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-// Sample product data with some missing attributes
+// Sample product data (unchanged)
 const products = [
   {
     id: 1,
@@ -232,9 +238,13 @@ export default function ShopPageClient() {
   const maxPrice = Math.max(...products.map((p) => p.price));
   const [priceRange, setPriceRange] = useState([minPrice, maxPrice]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(12); // Dynamic products per page
+  const [sortBy, setSortBy] = useState("default"); // Sorting state
+
+  // Available options for products per page
+  const productsPerPageOptions = [12, 18, 20, 25];
 
   // Pagination settings
-  const productsPerPage = 12;
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   // Dynamically extract filter options from products
@@ -244,8 +254,6 @@ export default function ShopPageClient() {
   const brands = [...new Set(products.map((p) => p.brand).filter(Boolean))];
   const colors = [...new Set(products.flatMap((p) => p.color).filter(Boolean))];
   const sizes = [...new Set(products.flatMap((p) => p.size).filter(Boolean))];
-
-  // Define Availability options based on stock
   const availabilityOptions = ["In Stock", "Low Stock", "Out of Stock"];
 
   // Function to determine availability status based on stock
@@ -255,7 +263,7 @@ export default function ShopPageClient() {
     return "In Stock";
   };
 
-  // Load filters and page from URL on mount
+  // Load filters, page, products per page, and sort from URL on mount
   useEffect(() => {
     const filter = searchParams.get("filter")?.split(",").filter(Boolean) || [];
     const price = searchParams.get("price")?.split("-").map(Number) || [
@@ -263,6 +271,8 @@ export default function ShopPageClient() {
       maxPrice,
     ];
     const page = Number(searchParams.get("page")) || 1;
+    const perPage = Number(searchParams.get("perPage")) || 12;
+    const sort = searchParams.get("sort") || "default";
 
     setSelectedCategories(filter.filter((id) => categories.includes(id)));
     setSelectedBrands(filter.filter((id) => brands.includes(id)));
@@ -273,9 +283,15 @@ export default function ShopPageClient() {
     );
     setPriceRange(price.length === 2 ? price : [minPrice, maxPrice]);
     setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+    setProductsPerPage(productsPerPageOptions.includes(perPage) ? perPage : 12);
+    setSortBy(
+      ["default", "high-to-low", "low-to-high"].includes(sort)
+        ? sort
+        : "default"
+    );
   }, [searchParams]);
 
-  // Update URL when filters or page change
+  // Update URL when filters, page, products per page, or sort change
   useEffect(() => {
     const params = new URLSearchParams();
     const allFilters = [
@@ -295,6 +311,12 @@ export default function ShopPageClient() {
     if (currentPage !== 1) {
       params.set("page", currentPage);
     }
+    if (productsPerPage !== 12) {
+      params.set("perPage", productsPerPage);
+    }
+    if (sortBy !== "default") {
+      params.set("sort", sortBy);
+    }
 
     router.push(`/shop?${params.toString()}`, { scroll: false });
   }, [
@@ -305,6 +327,8 @@ export default function ShopPageClient() {
     selectedAvailability,
     priceRange,
     currentPage,
+    productsPerPage,
+    sortBy,
     router,
   ]);
 
@@ -313,7 +337,7 @@ export default function ShopPageClient() {
     setFilter((prev) =>
       prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
     );
-    setCurrentPage(1); // Reset to first page on filter change
+    setCurrentPage(1);
   };
 
   // Handle price range change
@@ -329,49 +353,70 @@ export default function ShopPageClient() {
       }
       return newRange;
     });
-    setCurrentPage(1); // Reset to first page on price change
+    setCurrentPage(1);
   };
 
-  // Handle page change with delayed scroll to ensure DOM updates
+  // Handle products per page change
+  const handleProductsPerPageChange = (e) => {
+    const newPerPage = Number(e.target.value);
+    setProductsPerPage(newPerPage);
+    setCurrentPage(1);
+  };
+
+  // Handle sort change
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+    setCurrentPage(1);
+  };
+
+  // Handle page change with delayed scroll
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    // Delay the scroll to ensure the DOM has updated
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 100); // 100ms delay to allow DOM rendering
+    }, 100);
   };
 
-  // Filter products
-  const filteredProducts = products.filter((product) => {
-    const categoryMatch =
-      selectedCategories.length === 0 ||
-      selectedCategories.includes(product.category);
-    const brandMatch =
-      selectedBrands.length === 0 ||
-      !product.brand ||
-      selectedBrands.includes(product.brand);
-    const colorMatch =
-      selectedColors.length === 0 ||
-      !product.color ||
-      product.color.some((c) => selectedColors.includes(c));
-    const sizeMatch =
-      selectedSizes.length === 0 ||
-      !product.size ||
-      product.size.some((s) => selectedSizes.includes(s));
-    const priceMatch =
-      product.price >= priceRange[0] && product.price <= priceRange[1];
-    const availabilityMatch =
-      selectedAvailability.length === 0 ||
-      selectedAvailability.includes(getAvailabilityStatus(product.stock));
-    return (
-      categoryMatch &&
-      brandMatch &&
-      colorMatch &&
-      sizeMatch &&
-      priceMatch &&
-      availabilityMatch
-    );
-  });
+  // Filter and sort products
+  const filteredProducts = products
+    .filter((product) => {
+      const categoryMatch =
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(product.category);
+      const brandMatch =
+        selectedBrands.length === 0 ||
+        !product.brand ||
+        selectedBrands.includes(product.brand);
+      const colorMatch =
+        selectedColors.length === 0 ||
+        !product.color ||
+        product.color.some((c) => selectedColors.includes(c));
+      const sizeMatch =
+        selectedSizes.length === 0 ||
+        !product.size ||
+        product.size.some((s) => selectedSizes.includes(s));
+      const priceMatch =
+        product.price >= priceRange[0] && product.price <= priceRange[1];
+      const availabilityMatch =
+        selectedAvailability.length === 0 ||
+        selectedAvailability.includes(getAvailabilityStatus(product.stock));
+      return (
+        categoryMatch &&
+        brandMatch &&
+        colorMatch &&
+        sizeMatch &&
+        priceMatch &&
+        availabilityMatch
+      );
+    })
+    .sort((a, b) => {
+      if (sortBy === "high-to-low") {
+        return b.price - a.price;
+      } else if (sortBy === "low-to-high") {
+        return a.price - b.price;
+      }
+      return 0; // Default: no sorting
+    });
 
   // Paginate filtered products
   const paginatedProducts = filteredProducts.slice(
@@ -385,209 +430,290 @@ export default function ShopPageClient() {
   return (
     <div className="container mx-auto px-4 py-12 flex gap-6">
       {/* Sidebar Filters */}
-      <div className="w-[325px] h-fit border p-4 rounded-md">
-        <div className="relative space-y-5 mb-4">
-          <h3 className="font-semibold mb-3">Price Range</h3>
-          {/* Price Range Slider */}
-          <div className="relative w-full h-2">
-            {/* Background track */}
-            <div className="absolute w-full h-2 bg-gray-200 rounded"></div>
-            {/* Filled range between min and max */}
-            <div
-              className="absolute h-2 bg-primary rounded"
-              style={{
-                left: `${
-                  ((priceRange[0] - minPrice) / (maxPrice - minPrice)) * 100
-                }%`,
-                width: `${
-                  ((priceRange[1] - priceRange[0]) / (maxPrice - minPrice)) *
-                  100
-                }%`,
-              }}
-            />
-            {/* Min thumb */}
-            <input
-              type="range"
-              min={minPrice}
-              max={maxPrice}
-              value={priceRange[0]}
-              onChange={(e) => handlePriceChange(e, 0)}
-              className="absolute w-full h-2 appearance-none bg-transparent outline-none pointer-events-auto"
-              style={{ zIndex: 2 }}
-            />
-            {/* Max thumb */}
-            <input
-              type="range"
-              min={minPrice}
-              max={maxPrice}
-              value={priceRange[1]}
-              onChange={(e) => handlePriceChange(e, 1)}
-              className="absolute w-full h-2 appearance-none bg-transparent outline-none pointer-events-auto"
-              style={{ zIndex: 2 }}
-            />
-          </div>
-
-          {/* Price Range Filter */}
-          {products.some((p) => p.price) && (
-            <div className="flex items-center gap-2">
+      <div className="w-[325px] h-fit">
+        {/* Price Range Filter */}
+        <div className="w-full relative space-y-4 mb-4 border rounded-md">
+          <h3 className="text-[#000] font-semibold p-3 border-b">
+            Price Range
+          </h3>
+          <div className="px-4 py-2 space-y-6">
+            <div className="relative w-full h-2">
+              <div className="absolute w-full h-2 bg-gray-200 rounded"></div>
+              <div
+                className="absolute h-2 bg-[#E60CD9] rounded"
+                style={{
+                  left: `${
+                    ((priceRange[0] - minPrice) / (maxPrice - minPrice)) * 100
+                  }%`,
+                  width: `${
+                    ((priceRange[1] - priceRange[0]) / (maxPrice - minPrice)) *
+                    100
+                  }%`,
+                }}
+              />
               <input
-                type="text"
+                type="range"
+                min={minPrice}
+                max={maxPrice}
                 value={priceRange[0]}
                 onChange={(e) => handlePriceChange(e, 0)}
-                placeholder={minPrice.toString()}
-                className="w-full p-1 border rounded text-center"
+                className="absolute w-full h-2 appearance-none bg-transparent outline-none pointer-events-auto"
+                style={{ zIndex: 2 }}
               />
-              <span>-</span>
               <input
-                type="text"
+                type="range"
+                min={minPrice}
+                max={maxPrice}
                 value={priceRange[1]}
                 onChange={(e) => handlePriceChange(e, 1)}
-                placeholder={maxPrice.toString()}
-                className="w-full p-1 border rounded text-center"
+                className="absolute w-full h-2 appearance-none bg-transparent outline-none pointer-events-auto"
+                style={{ zIndex: 2 }}
               />
             </div>
-          )}
+            {products.some((p) => p.price) && (
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={priceRange[0]}
+                  onChange={(e) => handlePriceChange(e, 0)}
+                  placeholder={minPrice.toString()}
+                  className="w-full p-1 border outline-none rounded-md text-center"
+                />
+                <span>-</span>
+                <input
+                  type="text"
+                  value={priceRange[1]}
+                  onChange={(e) => handlePriceChange(e, 1)}
+                  placeholder={maxPrice.toString()}
+                  className="w-full p-1 border outline-none rounded-md text-center"
+                />
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Availability Filter */}
-        {products.some((p) => p.stock !== undefined) && (
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Availability</h3>
-            {availabilityOptions.map((option) => (
-              <label key={option} className="flex items-center mb-2">
-                <input
-                  type="checkbox"
-                  checked={selectedAvailability.includes(option)}
-                  onChange={() =>
-                    handleFilterChange(option, setSelectedAvailability)
-                  }
-                  className="mr-2"
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-        )}
+        {/* Accordion for Filters */}
+        <Accordion
+          defaultValue="availability"
+          type="single"
+          collapsible
+          className="w-full space-y-2"
+        >
+          {/* Availability Filter */}
+          {products.some((p) => p.stock !== undefined) && (
+            <AccordionItem value="availability" className="border rounded-md">
+              <AccordionTrigger className="text-[#000] font-semibold p-3 [&[data-state=open]]:border-b">
+                AVAILABILITY
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-2">
+                {availabilityOptions.map((option) => (
+                  <label
+                    key={option}
+                    className="flex items-center mb-2 text-[#605F5F] cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedAvailability.includes(option)}
+                      onChange={() =>
+                        handleFilterChange(option, setSelectedAvailability)
+                      }
+                      className="mr-2"
+                    />
+                    {option}
+                  </label>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
-        {/* Category Filter */}
-        {categories.length > 0 && (
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Categories</h3>
-            {categories.map((category) => (
-              <label key={category} className="flex items-center mb-2">
-                <input
-                  type="checkbox"
-                  checked={selectedCategories.includes(category)}
-                  onChange={() =>
-                    handleFilterChange(category, setSelectedCategories)
-                  }
-                  className="mr-2"
-                />
-                {category}
-              </label>
-            ))}
-          </div>
-        )}
+          {/* Category Filter */}
+          {categories.length > 0 && (
+            <AccordionItem value="categories" className="border rounded-md">
+              <AccordionTrigger className="text-[#000] font-semibold p-3 [&[data-state=open]]:border-b">
+                CATEGORIES
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-2">
+                {categories.map((category) => (
+                  <label
+                    key={category}
+                    className="flex items-center mb-2 text-[#605F5F] cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedCategories.includes(category)}
+                      onChange={() =>
+                        handleFilterChange(category, setSelectedCategories)
+                      }
+                      className="mr-2"
+                    />
+                    {category}
+                  </label>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
-        {/* Brand Filter */}
-        {brands.length > 0 && (
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Brands</h3>
-            {brands.map((brand) => (
-              <label key={brand} className="flex items-center mb-2">
-                <input
-                  type="checkbox"
-                  checked={selectedBrands.includes(brand)}
-                  onChange={() => handleFilterChange(brand, setSelectedBrands)}
-                  className="mr-2"
-                />
-                {brand}
-              </label>
-            ))}
-          </div>
-        )}
+          {/* Brand Filter */}
+          {brands.length > 0 && (
+            <AccordionItem value="brands" className="border rounded-md">
+              <AccordionTrigger className="text-[#000] font-semibold p-3 [&[data-state=open]]:border-b">
+                BRANDS
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-2">
+                {brands.map((brand) => (
+                  <label
+                    key={brand}
+                    className="flex items-center mb-2 text-[#605F5F] cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedBrands.includes(brand)}
+                      onChange={() =>
+                        handleFilterChange(brand, setSelectedBrands)
+                      }
+                      className="mr-2"
+                    />
+                    {brand}
+                  </label>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
-        {/* Color Filter */}
-        {colors.length > 0 && (
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Colors</h3>
-            {colors.map((color) => (
-              <label key={color} className="flex items-center mb-2">
-                <input
-                  type="checkbox"
-                  checked={selectedColors.includes(color)}
-                  onChange={() => handleFilterChange(color, setSelectedColors)}
-                  className="mr-2"
-                />
-                {color}
-              </label>
-            ))}
-          </div>
-        )}
+          {/* Color Filter */}
+          {colors.length > 0 && (
+            <AccordionItem value="colors" className="border rounded-md">
+              <AccordionTrigger className="text-[#000] font-semibold p-3 [&[data-state=open]]:border-b">
+                COLORS
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-2">
+                {colors.map((color) => (
+                  <label
+                    key={color}
+                    className="flex items-center mb-2 text-[#605F5F] cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedColors.includes(color)}
+                      onChange={() =>
+                        handleFilterChange(color, setSelectedColors)
+                      }
+                      className="mr-2"
+                    />
+                    {color}
+                  </label>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
-        {/* Size Filter */}
-        {sizes.length > 0 && (
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Sizes</h3>
-            {sizes.map((size) => (
-              <label key={size} className="flex items-center mb-2">
-                <input
-                  type="checkbox"
-                  checked={selectedSizes.includes(size)}
-                  onChange={() => handleFilterChange(size, setSelectedSizes)}
-                  className="mr-2"
-                />
-                {size}
-              </label>
-            ))}
-          </div>
-        )}
+          {/* Size Filter */}
+          {sizes.length > 0 && (
+            <AccordionItem value="sizes" className="border rounded-md">
+              <AccordionTrigger className="text-[#000] font-semibold p-3 [&[data-state=open]]:border-b">
+                SIZES
+              </AccordionTrigger>
+              <AccordionContent className="px-4 py-2">
+                {sizes.map((size) => (
+                  <label
+                    key={size}
+                    className="flex items-center mb-2 text-[#605F5F] cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedSizes.includes(size)}
+                      onChange={() =>
+                        handleFilterChange(size, setSelectedSizes)
+                      }
+                      className="mr-2"
+                    />
+                    {size}
+                  </label>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          )}
+        </Accordion>
       </div>
 
       {/* Product Grid */}
-      <div className="w-full h-full">
-        <div className="grid grid-cols-3 gap-6">
-          {paginatedProducts.map((product) => (
-            <ProductCard product={product} key={product?.id} />
-          ))}
-        </div>
-
-        {/* Pagination */}
-        {filteredTotalPages > 1 && (
-          <div className="flex justify-center mt-8">
-            <nav className="flex items-center gap-2">
-              <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 cursor-pointer"
+      <div className="space-y-4 w-full h-fit">
+        <div className="flex justify-between items-center border rounded-md p-2.5">
+          <h1 className="text-xl font-semibold">Page</h1>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">Show:</span>
+              <select
+                value={productsPerPage}
+                onChange={handleProductsPerPageChange}
+                className="p-1 border rounded-md text-sm"
               >
-                Previous
-              </button>
-              {Array.from({ length: filteredTotalPages }, (_, i) => i + 1).map(
-                (page) => (
+                {productsPerPageOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">Sort By:</span>
+              <select
+                value={sortBy}
+                onChange={handleSortChange}
+                className="p-1 border rounded-md text-sm"
+              >
+                <option value="default">Default</option>
+                <option value="high-to-low">Price: High to Low</option>
+                <option value="low-to-high">Price: Low to High</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-full">
+          <div className="grid grid-cols-3 gap-6">
+            {paginatedProducts.map((product) => (
+              <ProductCard product={product} key={product?.id} />
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {filteredTotalPages > 1 && (
+            <div className="flex justify-center mt-8">
+              <nav className="flex items-center gap-2">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 cursor-pointer"
+                >
+                  Previous
+                </button>
+                {Array.from(
+                  { length: filteredTotalPages },
+                  (_, i) => i + 1
+                ).map((page) => (
                   <button
                     key={page}
                     onClick={() => handlePageChange(page)}
                     className={`px-3 py-1 rounded cursor-pointer transition-all duration-200 ${
                       currentPage === page
-                        ? "bg-primary text-white"
-                        : "bg-[#DBCCCC] hover:bg-primary hover:text-white"
+                        ? "bg-[#E60CD9] text-white"
+                        : "bg-[#DBCCCC] hover:bg-[#E60CD9] hover:text-white"
                     }`}
                   >
                     {page}
                   </button>
-                )
-              )}
-              <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === filteredTotalPages}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 cursor-pointer"
-              >
-                Next
-              </button>
-            </nav>
-          </div>
-        )}
+                ))}
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === filteredTotalPages}
+                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 cursor-pointer"
+                >
+                  Next
+                </button>
+              </nav>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

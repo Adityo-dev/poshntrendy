@@ -14,12 +14,12 @@ const rightSide = [
   {
     id: 2,
     icon: <ShoppingCart size={24} />,
-    url: "/cart",
+    url: "/checkout/cart",
   },
   {
     id: 3,
     icon: <User size={24} />,
-    url: "/user",
+    url: "/auth/login",
   },
 ];
 
