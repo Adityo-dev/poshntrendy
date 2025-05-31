@@ -24,9 +24,9 @@ const socialMedia = [
 
 function CopyRights() {
   return (
-    <div className="py-3.5 bg-[#400A38]">
+    <div className="py-3.5 bg-[#000]">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
-        <p className="text-[#CAC8CA] text-base">
+        <p className="text-[#CAC8CA] text-sm">
           Posh N Trendy © 2025, All Rights Reserved
         </p>
 
@@ -35,7 +35,7 @@ function CopyRights() {
             <Link
               href={media.url}
               key={media.id}
-              className="bg-white p-2 rounded-full hover:bg-[#E8E8E8] transition-colors shadow"
+              className="bg-white p-1.5 rounded-full hover:bg-[#E8E8E8] transition-colors shadow"
               aria-label={media.name}
             >
               <Image
@@ -43,13 +43,13 @@ function CopyRights() {
                 width={24}
                 height={24}
                 alt={`${media.name} logo`}
-                className="w-5 h-5"
+                className="w-4 h-4"
               />
             </Link>
           ))}
         </div>
 
-        <div className="text-[#CAC8CA] text-sm md:text-base">
+        <div className="text-[#CAC8CA] text-sm">
           <Link href="/privacy" className="hover:underline">
             Privacy Policy
           </Link>
