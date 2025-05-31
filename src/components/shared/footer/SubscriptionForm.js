@@ -10,16 +10,16 @@ const SubscriptionForm = () => {
         <input
           type="email"
           placeholder="Enter Email Address"
-          className="flex-1 border border-primary px-4 py-2 rounded-md outline-none"
+          className="flex-1 border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
         />
         {isBd && (
           <input
             type="tel"
             placeholder="Enter Mobile Number"
-            className="flex-1 border border-primary px-4 py-2 rounded-md outline-none"
+            className="flex-1 border border-[#E60CD9] px-4 py-2 rounded-md outline-none"
           />
         )}
-        <button className="bg-primary hover:bg-[#C50ABF] text-lg text-primary-foreground px-6 py-2 rounded-md cursor-pointer">
+        <button className="bg-[#E60CD9] hover:bg-[#C50ABF] text-lg text-[#FBF9FB] px-6 py-2 rounded-md cursor-pointer">
           SUBSCRIBE
         </button>
       </div>

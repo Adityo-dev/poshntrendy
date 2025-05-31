@@ -14,16 +14,11 @@ import { usePathname } from "next/navigation";
 import * as React from "react";
 
 const navigationData = [
-  { title: "Home", href: "/" },
+  { title: "home", href: "/" },
   { title: "shop", href: "/shop" },
-  { title: "Lehengas", href: "/lehengas" },
-  { title: "Sarees", href: "/sarees" },
-  { title: "Kurta Sets", href: "/kurta-sets" },
-  { title: "Anarkalis", href: "/anarkalis" },
-  { title: "Shararas", href: "/shararas" },
-  { title: "Dresses", href: "/dresses" },
+  { title: "new", href: "/new" },
   {
-    title: "Special",
+    title: "women",
     subTitle: [
       {
         title: "Anarkalis",
@@ -47,11 +42,14 @@ const navigationData = [
       },
     ],
   },
-  { title: "Pret", href: "/pret" },
-  { title: "Fusion", href: "/fusion" },
-  { title: "Wedding", href: "/wedding" },
+  { title: "kids", href: "/kids" },
+  { title: "men", href: "/men" },
+  { title: "jewllery", href: "/jewllery" },
+  { title: "wedding", href: "/wedding" },
+  { title: "wear", href: "/wear" },
+  { title: "bags", href: "/bags" },
   {
-    title: "Women",
+    title: "party",
     subTitle: [
       {
         title: "New Arrivals",
@@ -77,7 +75,6 @@ const navigationData = [
         "Explore our complete collection of ethnic and contemporary wear",
     },
   },
-  { title: "Ready", href: "/ready-to-wear" },
   { title: "Sale", href: "/sale" },
 ];
 
@@ -96,8 +93,8 @@ export function BottomNavigationBar() {
                 <NavigationMenuItem key={index}>
                   <NavigationMenuTrigger
                     className={cn(
-                      "text-[#CAC8CA] hover:text-primary transition duration-300 cursor-pointer capitalize",
-                      isActive && "text-primary underline"
+                      "text-[#CAC8CA] hover:text-[#E60CD9] transition duration-300 cursor-pointer capitalize",
+                      isActive && "text-[#E60CD9] underline"
                     )}
                   >
                     {item?.title}
@@ -117,14 +114,14 @@ export function BottomNavigationBar() {
                               href={item.featured.href}
                               className="flex h-full w-full select-none flex-col justify-end rounded-md bg-[#400A38] bg-blend-overlay bg-cover bg-center p-6 no-underline outline-none text-white"
                               style={{
-                                backgroundImage: `url(${item?.featured?.image})`,
+                                backgroundImage: `url(${item.featured.image})`,
                               }}
                             >
                               <div className="mb-2 mt-4 text-lg font-medium drop-shadow">
-                                {item.featured?.title}
+                                {item.featured.title}
                               </div>
                               <p className="text-sm leading-tight drop-shadow">
-                                {item?.featured?.description}
+                                {item.featured.description}
                               </p>
                             </Link>
                           </NavigationMenuLink>
@@ -154,8 +151,8 @@ export function BottomNavigationBar() {
                 <NavigationMenuItem key={index}>
                   <NavigationMenuLink
                     className={cn(
-                      "text-[#CAC8CA] hover:text-primary transition duration-300 capitalize",
-                      isActive && "text-primary underline"
+                      "text-[#CAC8CA] hover:text-[#E60CD9] transition duration-300 capitalize",
+                      isActive && "text-[#E60CD9] underline"
                     )}
                     asChild
                   >
@@ -180,7 +177,7 @@ const ListItem = React.forwardRef(
             ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-pink-50 hover:text-pink-600 focus:bg-pink-50 focus:text-pink-600",
-              active && "text-primary",
+              active && "text-[#E60CD9]",
               className
             )}
             {...props}

@@ -70,37 +70,39 @@
   }
 }
 
-/* রেঞ্জ স্লাইডার কাস্টমাইজেশন */
+/*  */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
   height: 20px;
-  background: var(--primary);
+  background: #e60cd9;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid white;
+  pointer-events: auto;
 }
 
 input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  background: var(--primary);
+  background: #e60cd9;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid white;
+  pointer-events: auto;
 }
 
 input[type="range"] {
   pointer-events: none;
 }
 
-/*  */
+/* Loading styles and animaton  */
 
 .spinner {
-  --size: 30px;
+  --size: 40px;
   --first-block-clr: #e60cd9;
-  --second-block-clr: #fbd7e5;
+  --second-block-clr: #ffe5ec;
   --clr: #111;
   width: 100px;
   height: 100px;
