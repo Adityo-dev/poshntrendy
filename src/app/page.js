@@ -209,23 +209,6 @@ export default function Home() {
       <FestiveCollections />
       {/* <BestSellers /> */}
       {/* <Categories /> */}
-      <CollectionShowcase
-        bgColor={"#ffd7ad"}
-        title={"new arrivals"}
-        description={
-          "Blending the richness of tradition with the innovation of modernity creates a unique tapestry where the past and present coexist in perfect harmony. In every corner of design, culture, fashion, and architecture."
-        }
-        products={designerOnDiscount}
-        isSimpleSlider={true}
-        compoName={"newArrivals"}
-      />
-      {/* BEST SELLERS */}
-      <CollectionShowcase
-        bgColor="#FBF9FB"
-        title={"festive collections"}
-        showProducts={6}
-        products={weddingTales}
-      />
       {/* <ClientStories /> */}
       <SalesOngoing />
       {/* BRANDS */}
