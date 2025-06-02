@@ -19,7 +19,7 @@ const rightSide = [
   {
     id: 3,
     icon: <User size={24} />,
-    url: "/auth/login",
+    url: "/auth/register",
   },
 ];
 
@@ -28,7 +28,7 @@ function CenterNavigationBar() {
     <header className="bg-white">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Left Side Logo */}
-        <div className="w-[160px] h-[65px]">
+        <Link href={"/"} className="w-[160px] h-[65px]">
           <Image
             src={"/logo/Posh_N_Trendy___Logo.png"}
             width={400}
@@ -36,7 +36,7 @@ function CenterNavigationBar() {
             alt=""
             className="w-full h-full "
           />
-        </div>
+        </Link>
 
         {/* Center Search bar */}
         <div className="flex-1 max-w-2xl">
