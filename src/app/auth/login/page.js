@@ -10,7 +10,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="py-24">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
         <div className="flex items-center justify-center">
           <Image
@@ -18,6 +18,7 @@ export default function Login() {
             alt="Login Illustration"
             width={500}
             height={500}
+            className="w-fit h-[480px]"
           />
         </div>
         <div className="max-w-[550px] h-fit bg-white border rounded-xl shadow-lg p-6">
