@@ -7,31 +7,26 @@ const categories = [
     id: 1,
     image: "/image/product1.avif",
     title: "WOMEN",
-    url: "#",
   },
   {
     id: 2,
     image: "/image/kids.jpg",
     title: "KIDS",
-    url: "#",
   },
   {
     id: 3,
     image: "/image/product2.jpg",
     title: "MEN",
-    url: "#",
   },
   {
     id: 4,
     image: "/image/product11.jpg",
     title: "UPCOMING",
-    url: "#",
   },
   {
     id: 5,
     image: "/image/product7.jpg",
     title: "SALE",
-    url: "#",
   },
 ];
 
@@ -53,7 +48,7 @@ function Categories() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {categories.map((cate) => (
           <Link
-            href={cate?.url}
+            href={`/shop?filter=WoMen`}
             key={cate?.id}
             className="relative group overflow-hidden rounded-2xl"
           >

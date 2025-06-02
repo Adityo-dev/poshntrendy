@@ -24,7 +24,7 @@ const products = [
     color: ["Red", "Navy Blue"],
     size: ["M", "L", "XL"],
     stock: 14,
-    category: "Luxury Collection",
+    category: "WoMen",
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ const products = [
     color: ["Navy Blue"],
     size: ["S", "M", "L"],
     stock: 8,
-    category: "Luxury Collection",
+    category: "WoMen",
   },
   {
     id: 3,
@@ -150,7 +150,7 @@ const products = [
     color: ["Pink"],
     size: ["M", "L", "XL"],
     stock: 13,
-    category: "Luxury Collection",
+    category: "WoMen",
   },
   {
     id: 11,
@@ -164,7 +164,7 @@ const products = [
     color: ["black"],
     size: ["L", "XL"],
     stock: 4,
-    category: "Luxury Collection",
+    category: "WoMen",
   },
   {
     id: 12,

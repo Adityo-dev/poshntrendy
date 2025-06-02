@@ -1,4 +1,5 @@
 import CollectionShowcase from "@/components/collectionShowcase/CollectionShowcase";
+import EmptySection from "@/components/emptySection/EmptySection";
 import CartSection from "@/components/modules/cart/CartSection";
 const data = [
   {
@@ -56,10 +57,25 @@ const data = [
     url: "ivory-dream-lehenga",
   },
 ];
+
+const cartData = [
+  {
+    id: 1,
+  },
+  {
+    id: 2,
+  },
+];
+
 function Cart() {
   return (
     <section>
-      <CartSection />
+      {cartData.length > 0 ? (
+        <CartSection cartData={cartData} />
+      ) : (
+        <EmptySection />
+      )}
+
       <CollectionShowcase
         bgColor="#FBF9FB"
         title={"Best selling"}
