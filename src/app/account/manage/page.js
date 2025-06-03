@@ -38,10 +38,10 @@ const Dashboard = () => {
   ];
 
   return (
-    <section className="bg-[#ffe5ec]">
+    <section>
       <div className="container mx-auto px-4 py-12 flex space-x-4 w-full h-full">
         {/* Fixed Sidebar */}
-        <aside className="w-72 bg-gradient-to-br from-gray-900 to-gray-800 text-white p-4 shadow-xl rounded-lg h-full">
+        <aside className="w-72 bg-white border text-black p-4  rounded-lg h-full">
           <NameAndImage />
           <nav className="space-y-2">
             {navItems.map((item) => (
@@ -50,8 +50,8 @@ const Dashboard = () => {
                 onClick={() => setActiveTab(item.name)}
                 className={`flex items-center w-full p-3 rounded-lg transition-all ${
                   activeTab === item.name
-                    ? "bg-primary font-semibold shadow-md"
-                    : "hover:bg-white hover:bg-opacity-10"
+                    ? "bg-primary font-semibold text-white"
+                    : "bg-white hover:bg-opacity-10"
                 }`}
                 aria-current={activeTab === item.name ? "page" : undefined}
               >
@@ -64,20 +64,16 @@ const Dashboard = () => {
           </nav>
 
           {/* Points Display */}
-          <div className="mt-12 p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
-            <div className="text-secondary font-medium">Your Points</div>
-            <div className="text-4xl font-bold text-accent">200</div>
-            <p className="text-xs mt-1 text-gray-300">
-              Redeemable for discounts
-            </p>
-          </div>
+          <p className="pt-24 cursor-pointer">Log Out</p>
         </aside>
 
         {/* Main Content */}
         <main className="flex-1">
-          <div className="bg-white w-full h-full rounded-lg shadow-md p-6">
+          <div className="bg-white border w-full h-full rounded-lg p-6">
             <header className="mb-8">
-              <h1 className="text-3xl font-bold text-gray-900">{activeTab}</h1>
+              <h1 className="text-3xl font-bold text-gray-900">
+                My {activeTab}
+              </h1>
               <p className="text-gray-600 mt-2">
                 {getTabDescription(activeTab)}
               </p>
