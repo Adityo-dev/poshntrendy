@@ -69,9 +69,9 @@ function NameAndImage() {
         )}
       </div>
 
-      <p className="flex flex-col">
+      <p className="flex flex-col ">
         <span className="text-primary">Hi</span>
-        <span className="text-secondary">Aditto Dev Barmon</span>
+        <span className="text-black">Aditto Dev Barmon</span>
       </p>
     </div>
   );
