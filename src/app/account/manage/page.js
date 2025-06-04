@@ -64,7 +64,7 @@ const Dashboard = () => {
           </nav>
 
           {/* Points Display */}
-          <p className="pt-24 cursor-pointer">Log Out</p>
+          <p className="pt-24">Log Out</p>
         </aside>
 
         {/* Main Content */}
