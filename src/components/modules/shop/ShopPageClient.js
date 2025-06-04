@@ -428,7 +428,7 @@ export default function ShopPageClient() {
   );
 
   return (
-    <div className="container mx-auto px-4 py-12 flex gap-6">
+    <div className="container mx-auto px-4 py-6 flex gap-6">
       {/* Sidebar Filters */}
       <div className="w-[325px] h-fit">
         {/* Price Range Filter */}

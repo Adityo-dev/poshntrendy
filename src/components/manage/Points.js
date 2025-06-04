@@ -1,6 +1,6 @@
 function Points() {
   return (
-    <div className="text-center py-12">
+    <div className="text-center py-1">
       <div className="text-6xl font-bold text-accent mb-4">200</div>
       <p className="text-gray-600">Loyalty Points</p>
       <div className="max-w-md mx-auto mt-6">

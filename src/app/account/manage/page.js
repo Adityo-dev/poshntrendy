@@ -1,23 +1,24 @@
 "use client";
 import {
-  Heart as FiHeart,
-  MapPin as FiMapPin,
-  ShoppingBag as FiShoppingBag,
-  Lock,
+  Heart,
+  LockIcon,
+  LogOut,
+  MapPin,
+  ShoppingBag,
   User,
 } from "lucide-react";
 import { useState } from "react";
 
 // Dynamic imports for better performance
-const Address = dynamic(() => import("@/components/manage/Address"));
+const Address = dynamic(() => import("@/components/manage/address/Address"));
 const Coupon = dynamic(() => import("@/components/manage/Coupon"));
-const Orders = dynamic(() => import("@/components/manage/Orders"));
+const Orders = dynamic(() => import("@/components/manage/orders/Orders"));
 const Password = dynamic(() => import("@/components/manage/Password"));
 const Points = dynamic(() => import("@/components/manage/Points"));
 const Profile = dynamic(() => import("@/components/manage/Profile"));
 const Referral = dynamic(() => import("@/components/manage/Referral"));
 const Review = dynamic(() => import("@/components/manage/Review"));
-const Wishlist = dynamic(() => import("@/components/manage/Wishlist"));
+const Wishlist = dynamic(() => import("@/components/manage/wishlist/Wishlist"));
 
 import NameAndImage from "@/components/manage/NameAndImage";
 import dynamic from "next/dynamic";
@@ -27,19 +28,19 @@ const Dashboard = () => {
 
   const navItems = [
     { name: "Profile", icon: <User className="w-5 h-5" /> },
-    { name: "Password", icon: <Lock className="w-5 h-5" /> },
-    { name: "Wish List", icon: <FiHeart className="w-5 h-5" /> },
-    { name: "Orders", icon: <FiShoppingBag className="w-5 h-5" /> },
-    { name: "Address", icon: <FiMapPin className="w-5 h-5" /> },
-    // { name: "Points", icon: <FiStar className="w-5 h-5" /> },
-    // { name: "Coupon", icon: <FiTag className="w-5 h-5" /> },
-    // { name: "Review", icon: <FiEdit className="w-5 h-5" /> },
-    // { name: "Referral", icon: <FiShare2 className="w-5 h-5" /> },
+    { name: "Password", icon: <LockIcon className="w-5 h-5" /> },
+    { name: "Wish List", icon: <Heart className="w-5 h-5" /> },
+    { name: "Orders", icon: <ShoppingBag className="w-5 h-5" /> },
+    { name: "Address", icon: <MapPin className="w-5 h-5" /> },
+    // { name: "Points", icon: <MapPin className="w-5 h-5" /> },
+    // { name: "Coupon", icon: <Tag className="w-5 h-5" /> },
+    // { name: "Review", icon: <Edit className="w-5 h-5" /> },
+    // { name: "Referral", icon: <Share2 className="w-5 h-5" /> },
   ];
 
   return (
     <section>
-      <div className="container mx-auto px-4 py-12 flex space-x-4 w-full h-full">
+      <div className="container mx-auto px-4 py-6 flex space-x-4 w-full h-full">
         {/* Fixed Sidebar */}
         <aside className="w-72 bg-white border text-black p-4  rounded-lg h-full">
           <NameAndImage />
@@ -64,7 +65,9 @@ const Dashboard = () => {
           </nav>
 
           {/* Points Display */}
-          <p className="pt-24">Log Out</p>
+          <p className="mt-24 flex items-center gap-1 cursor-pointer text-primary font-semibold">
+            Log Out <LogOut className="w-4 h-4" />
+          </p>
         </aside>
 
         {/* Main Content */}

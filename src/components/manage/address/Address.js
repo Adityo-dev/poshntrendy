@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Empty from "../Empty";
+import AddressCard from "./AddressCard";
 import AddressForm from "./AddressFrom";
 
 export default function Address() {
@@ -78,7 +80,7 @@ export default function Address() {
     : null;
 
   return (
-    <div>
+    <>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold text-gray-800">
           {isAddNew
@@ -104,50 +106,29 @@ export default function Address() {
         )}
       </div>
 
-      {isAddNew ? (
-        <AddressForm
-          onSubmit={handleNewAddress}
-          initialData={editingAddress || undefined}
-        />
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {addresses.map((address) => (
-            <div
-              key={address.id}
-              className="border border-gray-200 rounded-lg p-4 transition-shadow bg-white"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <span className="inline-block px-3 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full mb-2">
-                    {address.type}
-                  </span>
-                  <h3 className="font-medium text-gray-900">
-                    {address.fullName}
-                  </h3>
-                  <p className="text-gray-600 text-sm mt-1">
-                    {address.phoneNumber}
-                  </p>
-                  <p className="text-gray-700 mt-2">{address.address}</p>
-                </div>
-                <div className="flex space-x-3">
-                  <button
-                    onClick={() => handleEdit(address?.id)}
-                    className="text-primary hover:text-primary-dark text-sm font-medium"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleRemoveAddress(address?.id)}
-                    className="text-red-600 text-sm font-medium"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+      {addresses.length > 0 ? (
+        <div>
+          {isAddNew ? (
+            <AddressForm
+              onSubmit={handleNewAddress}
+              initialData={editingAddress || undefined}
+            />
+          ) : (
+            <AddressCard
+              addresses={addresses}
+              onHandleEdit={handleEdit}
+              onHandleRemoveAddress={handleRemoveAddress}
+            />
+          )}
         </div>
+      ) : (
+        <Empty
+          title={"No address found!"}
+          description={
+            "Looks like your address is still deciding where it wants to live — maybe it's traveling the world or chilling in the cloud! 🌍☁️🏡"
+          }
+        />
       )}
-    </div>
+    </>
   );
 }

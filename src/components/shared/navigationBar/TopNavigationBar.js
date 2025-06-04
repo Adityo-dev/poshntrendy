@@ -1,5 +1,5 @@
 // import lucide icons
-import { Heart, ShoppingCart, User } from "lucide-react";
+import { ShoppingCart, User } from "lucide-react";
 // import components
 import Image from "next/image";
 import Link from "next/link";
@@ -8,16 +8,11 @@ import SearchBar from "./SearchBar";
 const rightSide = [
   {
     id: 1,
-    icon: <Heart size={24} />,
-    url: "/wishlist",
-  },
-  {
-    id: 2,
     icon: <ShoppingCart size={24} />,
     url: "/checkout/cart",
   },
   {
-    id: 3,
+    id: 2,
     icon: <User size={24} />,
     url: "/auth/register",
   },
