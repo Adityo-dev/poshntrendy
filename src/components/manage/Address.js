@@ -15,19 +15,19 @@ export default function Address() {
       zone: "New York",
       addressLine: "Apt 4B",
       remark: "123 Main St",
-      address: "123 Main St, Apt 4B, New York, NY 10001",
+      address: "123 Main St, Apt 4B, Chatmohar, Pabna",
     },
     {
       id: 2,
       type: "Work",
-      fullName: "John Doe",
+      fullName: "Koushik Barmon",
       phoneNumber: "+8801770365981",
       email: "adittodev01770@example.com",
       district: "456 Business Ave",
       zone: "Floor 12",
       addressLine: "New York",
       remark: "NY 10005",
-      address: "456 Business Ave, Floor 12, New York, NY 10005",
+      address: "456 Business Ave, Floor 12, Chatmohar, Pabna",
     },
   ]);
 
@@ -47,7 +47,7 @@ export default function Address() {
             ? {
                 ...addr,
                 ...newAddress,
-                address: `${newAddress.remark}, ${newAddress.addressLine}, ${newAddress.district}, ${newAddress.zone}`,
+                address: `${newAddress.remark}, ${newAddress.addressLine}, ${newAddress.zone}, ${newAddress.district}`,
               }
             : addr
         )
@@ -61,7 +61,7 @@ export default function Address() {
         {
           ...newAddress,
           id: Date.now(),
-          address: `${newAddress.remark}, ${newAddress.addressLine}, ${newAddress.district}, ${newAddress.zone}`,
+          address: `${newAddress.remark}, ${newAddress.addressLine}, ${newAddress.zone}, ${newAddress.district}`,
         },
       ]);
       setIsAddNew(false);

@@ -10,6 +10,57 @@ export default function AddressForm({ onSubmit, initialData }) {
     addressLine: "",
     remark: "",
   });
+  const [districts, setDistricts] = useState([]);
+  const [zones, setZones] = useState([]);
+  const [districtsFetched, setDistrictsFetched] = useState(false);
+
+  useEffect(() => {
+    const fetchDistricts = async () => {
+      try {
+        const res = await fetch(
+          "https://locator-api.declives.com/api/v1/districts"
+        );
+        const result = await res.json();
+        if (result.success && Array.isArray(result.data)) {
+          setDistricts(result.data);
+          setDistrictsFetched(true);
+        }
+      } catch (error) {
+        console.error("Failed to fetch districts:", error);
+      }
+    };
+
+    if (!districtsFetched) {
+      fetchDistricts();
+    }
+  }, [districtsFetched]);
+
+  useEffect(() => {
+    const fetchZones = async () => {
+      const selectedDistrict = districts.find(
+        (district) => district.name === formData.district
+      );
+      if (selectedDistrict?.id) {
+        try {
+          const res = await fetch(
+            `https://locator-api.declives.com/api/v1/upazilas/${selectedDistrict.id}`
+          );
+          const result = await res.json();
+          if (result.success && Array.isArray(result.data)) {
+            setZones(result.data);
+          }
+        } catch (error) {
+          console.error("Failed to fetch zones:", error);
+        }
+      } else {
+        setZones([]);
+      }
+    };
+
+    if (formData.district) {
+      fetchZones();
+    }
+  }, [formData.district, districts]);
 
   useEffect(() => {
     if (initialData) {
@@ -109,9 +160,11 @@ export default function AddressForm({ onSubmit, initialData }) {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="">Select</option>
-              <option value="district1">District 1</option>
-              <option value="district2">District 2</option>
-              <option value="district3">District 3</option>
+              {districts.map((district) => (
+                <option key={district.id} value={district.name}>
+                  {district.name} ({district.bn_name})
+                </option>
+              ))}
             </select>
           </div>
           <div>
@@ -119,16 +172,23 @@ export default function AddressForm({ onSubmit, initialData }) {
               htmlFor="zone"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Zone
+              Zone <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
+            <select
               id="zone"
               name="zone"
               value={formData.zone}
               onChange={handleChange}
+              required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
+            >
+              <option value="">Select</option>
+              {zones.map((zone) => (
+                <option key={zone.id} value={zone.name}>
+                  {zone.name} ({zone.bn_name})
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
