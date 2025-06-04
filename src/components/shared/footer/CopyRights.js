@@ -49,10 +49,21 @@ function CopyRights() {
           ))}
         </div>
 
-        <div className="text-[#CAC8CA] text-sm">
-          <Link href="/privacy" className="hover:underline">
-            Privacy Policy
-          </Link>
+        <div className="flex items-center gap-3">
+          <Image
+            src={"/icons/appStore.png"}
+            width={100}
+            height={100}
+            alt=""
+            className="w-full h-full"
+          />
+          <Image
+            src={"/icons/googlePlay.png"}
+            width={100}
+            height={100}
+            alt=""
+            className="w-full h-full"
+          />
         </div>
       </div>
     </div>
