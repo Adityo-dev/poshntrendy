@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -68,8 +68,8 @@ const ProductImages = ({ images = [] }) => {
             width={400}
             height={400}
             alt={`Thumbnail ${index}`}
-            className={`w-full h-full object-cover cursor-pointer border-2 rounded-2xl ${
-              selectedImg === index ? "border-black" : "border-transparent"
+            className={`w-full h-full object-cover cursor-pointer border-2 rounded-2xl transition-all duration-200 ${
+              selectedImg === index ? "border-primary" : "border-transparent"
             }`}
             onClick={() => handleThumbnailClick(index)}
             onError={(e) => {
@@ -79,21 +79,21 @@ const ProductImages = ({ images = [] }) => {
           />
         ))}
 
-        <div>
+        <div className="flex items-center gap-4">
           <button
             onClick={handleNext}
-            className="p-1 rounded-full hover:bg-gray-100"
+            className="bg-primary text-white w-10 h-10 rounded-md flex items-center justify-center"
             aria-label="Next image"
           >
-            <ArrowLeft className="text-xl" />
+            <ChevronLeft className="text-xl" />
           </button>
 
           <button
             onClick={handlePrev}
-            className="p-1 rounded-full hover:bg-gray-100"
+            className="bg-primary text-white w-10 h-10 rounded-md flex items-center justify-center"
             aria-label="Previous image"
           >
-            <ArrowRight className="text-xl" />
+            <ChevronRight className="text-xl" />
           </button>
         </div>
       </div>
@@ -111,25 +111,27 @@ const ProductImages = ({ images = [] }) => {
           width={800}
           height={800}
           alt="Product"
-          className="w-full h-auto object-cover rounded-xl cursor-crosshair"
+          className="w-full h-auto object-cover rounded-xl cursor-zoom-in"
           priority
         />
 
         {/* Zoomed preview */}
-        {showZoom && (
-          <div
-            ref={zoomRef}
-            className="hidden lg:block absolute left-full top-0 ml-4 w-[400px] h-[400px] overflow-hidden border border-gray-200 bg-white"
-          >
-            <div
-              className="w-full h-full bg-no-repeat bg-[length:200%]"
-              style={{
-                backgroundImage: `url(${images[selectedImg]})`,
-                backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
-              }}
-            />
-          </div>
-        )}
+        <div
+          style={
+            showZoom
+              ? {
+                  backgroundImage: `url(${images[selectedImg]})`,
+                  backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                  backgroundSize: "300%",
+                  opacity: 1,
+                }
+              : {}
+          }
+          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-300 pointer-events-none rounded-xl ${
+            showZoom ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden="true"
+        />
       </div>
     </div>
   );
