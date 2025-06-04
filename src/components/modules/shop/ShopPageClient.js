@@ -224,7 +224,7 @@ const products = [
   },
 ];
 
-export default function ShopPageClient() {
+export default function ShopPageClient({ params: pageName }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -318,7 +318,7 @@ export default function ShopPageClient() {
       params.set("sort", sortBy);
     }
 
-    router.push(`/shop?${params.toString()}`, { scroll: false });
+    router.push(`/${pageName}?${params.toString()}`, { scroll: false });
   }, [
     selectedCategories,
     selectedBrands,
@@ -639,7 +639,7 @@ export default function ShopPageClient() {
       {/* Product Grid */}
       <div className="space-y-4 w-full h-fit">
         <div className="flex justify-between items-center border rounded-md p-2.5">
-          <h1 className="text-xl font-semibold">Page</h1>
+          <h1 className="text-xl font-semibold capitalize">{pageName}</h1>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600">Show:</span>
