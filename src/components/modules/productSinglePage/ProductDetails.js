@@ -1,6 +1,7 @@
-import { ShoppingBasket } from "lucide-react";
 import Link from "next/link";
+import ProductActionBtn from "./ProductActionBtn";
 import { ProductsDetailsAccordion } from "./ProductsDetailsAccordion";
+import SizeSelection from "./SizeSelection";
 
 function ProductDetails() {
   return (
@@ -16,32 +17,10 @@ function ProductDetails() {
 
       {/* Size selection And Action Buttons */}
       <div className="py-4 border-y border-[#605F5F]">
-        <div className="mb-4">
-          <p className="text-base font-semibold mb-3 text-[#605F5F]">
-            Select your size
-            <span className="font-normal"> What’s my size?</span>
-          </p>
-          <div className="flex gap-3">
-            {["STITCH", "UNSTITCH"].map((size) => (
-              <button
-                key={size}
-                className="px-4 py-2 border border-[#605F5F] text-base font-bold rounded-[6px] cursor-pointer"
-              >
-                {size}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex gap-4 mb-2">
-          <button className="flex-1 py-3 bg-[#E60CD9] text-[#FBF9FB] text-lg rounded-lg hover:opacity-90 transition cursor-pointer flex items-center justify-center gap-2">
-            <ShoppingBasket /> Add To Cart
-          </button>
-          <button className="flex-1 py-3 border border-[#E60CD9] text-[#0D0C0D] text-lg rounded-lg hover:bg-[#E60CD9] hover:text-[#FBF9FB] transition duration-300 cursor-pointer">
-            Buy Now
-          </button>
-        </div>
+        <SizeSelection />
+        <ProductActionBtn />
       </div>
+      {/* Product details */}
       <ProductsDetailsAccordion />
       {/* Footer Links */}
       <div className="mt-6 text-base text-[#E82323] underline flex gap-4">

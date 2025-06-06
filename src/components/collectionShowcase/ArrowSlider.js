@@ -1,6 +1,6 @@
 "use client";
 
-import { MoveLeft, MoveRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState } from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import ProductCard from "../cardGroup/ProductCard";
 // custom styles for the button
 const customButtonStyles =
-  "w-[50px] h-[50px] flex items-center justify-center rounded-full shadow-md cursor-pointer";
+  "w-12 h-12 flex items-center justify-center rounded-md shadow-md cursor-pointer";
 
 const ArrowSlider = ({
   sliderData = [],
@@ -38,7 +38,7 @@ const ArrowSlider = ({
             } 
             ${customButtonStyles}`}
       >
-        <MoveLeft size={28} strokeWidth={1.75} />
+        <ChevronLeft size={24} />
       </button>
 
       <Swiper
@@ -85,7 +85,7 @@ const ArrowSlider = ({
             } 
             ${customButtonStyles}`}
       >
-        <MoveRight size={28} strokeWidth={1.75} />
+        <ChevronRight size={24} />
       </button>
     </section>
   );
