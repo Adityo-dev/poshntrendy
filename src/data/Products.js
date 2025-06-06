@@ -1,11 +1,4 @@
-import Categories from "@/components/modules/home/Categories";
-import ClientStories from "@/components/modules/home/clientStories/ClientStories";
-import FestiveCollections from "@/components/modules/home/FestiveCollections";
-import Hero from "@/components/modules/home/hero/Hero";
-import NewArrivals from "@/components/modules/home/NewArrivals";
-import SalesOngoing from "@/components/modules/home/SalesOngoing";
-
-const designerOnDiscount = [
+const Products = [
   {
     id: 1,
     image: "/image/product1.jpg",
@@ -14,6 +7,11 @@ const designerOnDiscount = [
     discount: 0,
     rating: 5,
     url: "awigna-by-warsha-ritt",
+    brand: "GlamGlow",
+    color: ["Red", "Navy Blue"],
+    size: ["M", "L", "XL"],
+    stock: 14,
+    category: "WoMen",
   },
   {
     id: 2,
@@ -23,6 +21,11 @@ const designerOnDiscount = [
     discount: 0,
     rating: 4.9,
     url: "golden-glam-lehenga",
+    brand: "GlamGlow",
+    color: ["Navy Blue"],
+    size: ["S", "M", "L"],
+    stock: 8,
+    category: "WoMen",
   },
   {
     id: 3,
@@ -32,6 +35,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.8,
     url: "royal-red-bridal-set",
+    brand: "AWIGNA",
+    color: ["Red", "Navy Blue"],
+    size: ["M", "L"],
+    stock: 0,
+    category: "Bridal Wear",
   },
   {
     id: 4,
@@ -41,6 +49,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.7,
     url: "peach-elegance-embroidery",
+    brand: "IvoryCharm",
+    color: ["Navy Blue", "Silver"],
+    size: ["S", "M", "L", "XL"],
+    stock: 5,
+    category: "Embroidered Wear",
   },
   {
     id: 5,
@@ -50,6 +63,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.9,
     url: "maroon-net-bridal-wear",
+    brand: "AWIGNA",
+    color: ["Navy Blue"],
+    size: ["M", "L"],
+    stock: 12,
+    category: "Net Collection",
   },
   {
     id: 6,
@@ -59,6 +77,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.8,
     url: "ivory-dream-lehenga",
+    brand: "IvoryCharm",
+    color: ["Silver"],
+    size: ["S", "M", "L"],
+    stock: 10,
+    category: "Bridal Wear",
   },
   {
     id: 7,
@@ -68,6 +91,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.7,
     url: "navy-blue-mirror-work",
+    brand: "IvoryCharm",
+    color: ["Navy Blue"],
+    size: ["M", "L", "XL"],
+    stock: 6,
+    category: "Mirror Work",
   },
   {
     id: 8,
@@ -77,6 +105,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.6,
     url: "silver-zari-embroidered-set",
+    brand: "ZariLux",
+    color: ["Red", "Silver"],
+    size: ["S", "M", "L"],
+    stock: 11,
+    category: "Bridal Wear",
   },
   {
     id: 9,
@@ -86,6 +119,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.5,
     url: "mustard-silk-festive-wear",
+    brand: "IvoryCharm",
+    color: ["white"],
+    size: ["M", "L"],
+    stock: 7,
+    category: "Mirror Work",
   },
   {
     id: 10,
@@ -95,6 +133,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.9,
     url: "emerald-green-luxury-look",
+    brand: "ZariLux",
+    color: ["Pink"],
+    size: ["M", "L", "XL"],
+    stock: 13,
+    category: "WoMen",
   },
   {
     id: 11,
@@ -104,6 +147,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.8,
     url: "velvet-red-wedding-wear",
+    brand: "IvoryCharm",
+    color: ["black"],
+    size: ["L", "XL"],
+    stock: 4,
+    category: "WoMen",
   },
   {
     id: 12,
@@ -113,6 +161,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.7,
     url: "pastel-peach-bridal-set",
+    brand: "ZariLux",
+    color: ["Black"],
+    size: ["S", "M", "L"],
+    stock: 9,
+    category: "Bridal Wear",
   },
   {
     id: 13,
@@ -122,6 +175,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.6,
     url: "champagne-designer-lehenga",
+    brand: "ChampagneCharm",
+    color: ["White"],
+    size: ["M", "L", "XL"],
+    stock: 10,
+    category: "Mirror Work",
   },
   {
     id: 14,
@@ -131,6 +189,11 @@ const designerOnDiscount = [
     discount: 10,
     rating: 4.9,
     url: "satin-rose-embroidered-dress",
+    brand: "ChampagneCharm",
+    color: ["Red", "Pink"],
+    size: ["S", "M"],
+    stock: 6,
+    category: "Embroidered Wear",
   },
   {
     id: 15,
@@ -140,77 +203,12 @@ const designerOnDiscount = [
     discount: 10,
     rating: 5.0,
     url: "designer-net-bridal-lehenga",
+    brand: "ChampagneCharm",
+    color: ["White", "Silver"],
+    size: ["M", "L", "XL"],
+    stock: 7,
+    category: "Bridal Wear",
   },
 ];
 
-const weddingTales = [
-  {
-    id: 1,
-    image: "/image/product11.jpg",
-    title: "AWIGNA by Warsha & Rittu",
-    price: 471,
-    discount: 0,
-    rating: 5,
-    url: "awigna-by-warsha-ritt",
-  },
-  {
-    id: 2,
-    image: "/image/product10.jpg",
-    title: "Golden Glam Lehenga",
-    price: 432,
-    discount: 0,
-    rating: 4.9,
-    url: "golden-glam-lehenga",
-  },
-  {
-    id: 3,
-    image: "/image/product9.jpg",
-    title: "Royal Red Bridal Set",
-    price: 468,
-    discount: 10,
-    rating: 4.8,
-    url: "royal-red-bridal-set",
-  },
-  {
-    id: 4,
-    image: "/image/product3.jpg",
-    title: "Peach Elegance Embroidery",
-    price: 414,
-    discount: 10,
-    rating: 4.7,
-    url: "peach-elegance-embroidery",
-  },
-  {
-    id: 5,
-    image: "/image/product7.jpg",
-    title: "Maroon Net Bridal Wear",
-    price: 468,
-    discount: 10,
-    rating: 4.9,
-    url: "maroon-net-bridal-wear",
-  },
-  {
-    id: 6,
-    image: "/image/product6.jpg",
-    title: "Ivory Dream Lehenga",
-    price: 441,
-    discount: 10,
-    rating: 4.8,
-    url: "ivory-dream-lehenga",
-  },
-];
-
-export default function Home() {
-  return (
-    <main>
-      <Hero />
-      <Categories />
-      <NewArrivals />
-      <FestiveCollections />
-      {/* <BestSellers /> */}
-      <ClientStories />
-      <SalesOngoing />
-      {/* BRANDS */}
-    </main>
-  );
-}
+export { Products };

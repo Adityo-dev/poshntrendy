@@ -1,9 +1,9 @@
-import ShopPageClient from "@/components/modules/shop/ShopPageClient";
+import UniversalProductList from "@/components/universalProductList/UniversalProductList";
 
 export default function ShopPage() {
   return (
     <>
-      <ShopPageClient params={"shop"} />
+      <UniversalProductList params={"shop"} />
     </>
   );
 }
