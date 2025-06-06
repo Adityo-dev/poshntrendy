@@ -1,9 +1,9 @@
-import ShopPageClient from "@/components/modules/shop/ShopPageClient";
+import UniversalProductList from "@/components/universalProductList/UniversalProductList";
 
 function New() {
   return (
     <>
-      <ShopPageClient params={"new"} />
+      <UniversalProductList params={"new"} />
     </>
   );
 }
