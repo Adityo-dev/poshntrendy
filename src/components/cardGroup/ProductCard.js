@@ -10,7 +10,7 @@ function ProductCard({ product }) {
           width={600}
           height={600}
           alt=""
-          className="w-full h-[560px] object-fill"
+          className="w-full h-[560px] object-cover"
         />
       </Link>
       <div className=" relative p-4">
