@@ -1,12 +1,8 @@
 import CollectionShowcase from "@/components/collectionShowcase/CollectionShowcase";
 import ProductDetails from "@/components/modules/productSinglePage/ProductDetails";
 import ProductImages from "@/components/modules/productSinglePage/ProductImages";
+import { Products } from "@/data/Products";
 
-const images = [
-  "/image/product11.jpg",
-  "/image/product2.jpg",
-  "/image/product3.jpg",
-];
 const weddingTales = [
   {
     id: 1,
@@ -120,16 +116,19 @@ const similarProducts = [
   },
 ];
 
-function ProductSinglePage() {
+function ProductSinglePage({ params }) {
+  const id = Number(params?.slug);
+  const filterData = Products.find((product) => product.id === id);
+
   return (
     <>
       <section className="bg-[#FFE5EC] pb-16">
         <div className="container mx-auto px-4 py-6 grid grid-cols-12 gap-10 items-start">
           <div className="col-span-7">
-            <ProductImages images={images} />
+            <ProductImages images={filterData?.variations} />
           </div>
           <div className="col-span-5">
-            <ProductDetails />
+            <ProductDetails productData={filterData} />
           </div>
         </div>
       </section>
