@@ -4,9 +4,9 @@ import Link from "next/link";
 function ProductCard({ product }) {
   return (
     <div className="group w-full max-h-[680px] bg-[#FEFEFE] border-2 hover:border-primary rounded-[12px] transition-all duration-300 overflow-hidden">
-      <Link href={`/products/${product?.title}`}>
+      <Link href={`/products/${product?.id}`}>
         <Image
-          src={product?.image}
+          src={product?.thumbnail || product?.image}
           width={600}
           height={600}
           alt=""
