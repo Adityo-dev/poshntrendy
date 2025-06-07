@@ -64,7 +64,7 @@ const ProductImages = ({ images = [] }) => {
         {images.map((img, index) => (
           <Image
             key={index}
-            src={img}
+            src={img.thumbnail}
             width={400}
             height={400}
             alt={`Thumbnail ${index}`}
@@ -107,7 +107,7 @@ const ProductImages = ({ images = [] }) => {
         onMouseMove={handleMouseMove}
       >
         <Image
-          src={images[selectedImg]}
+          src={images[selectedImg].thumbnail}
           width={800}
           height={800}
           alt="Product"
@@ -120,7 +120,7 @@ const ProductImages = ({ images = [] }) => {
           style={
             showZoom
               ? {
-                  backgroundImage: `url(${images[selectedImg]})`,
+                  backgroundImage: `url(${images[selectedImg].thumbnail})`,
                   backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
                   backgroundSize: "300%",
                   opacity: 1,
