@@ -1,11 +1,11 @@
 import Link from "next/link";
 import CategoriesCart from "./CategoriesCart";
 
-// data
+// Category Data
 const categories = [
   {
     id: 1,
-    image: "/image/product1.avif",
+    image: "/image/realWomen.jpg",
     title: "WOMEN",
   },
   {
@@ -15,17 +15,17 @@ const categories = [
   },
   {
     id: 3,
-    image: "/image/product2.jpg",
+    image: "/image/men8.jpg",
     title: "MEN",
   },
   {
     id: 4,
-    image: "/image/product11.jpg",
+    image: "/image/menUpcoming.jpg",
     title: "UPCOMING",
   },
   {
     id: 5,
-    image: "/image/product7.jpg",
+    image: "/image/product3.jpg",
     title: "SALE",
   },
 ];
