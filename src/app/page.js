@@ -1,3 +1,5 @@
+import BestSellers from "@/components/modules/home/BestSellers";
+import Brands from "@/components/modules/home/brands/Brands";
 import Categories from "@/components/modules/home/categories/Categories";
 import ClientStories from "@/components/modules/home/clientStories/ClientStories";
 import FestiveCollections from "@/components/modules/home/FestiveCollections";
@@ -11,11 +13,11 @@ export default function Home() {
       <Hero />
       <Categories />
       <NewArrivals />
+      <BestSellers />
       <FestiveCollections />
-      {/* <BestSellers /> */}
       <ClientStories />
       <SalesOngoing />
-      {/* BRANDS */}
+      <Brands />
     </main>
   );
 }

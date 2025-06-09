@@ -10,7 +10,7 @@ function ProductCard({ product }) {
           width={600}
           height={600}
           alt=""
-          className="w-full h-[560px] object-cover"
+          className="w-full h-[560px] object-fill"
         />
       </Link>
       <div className=" relative p-4">
@@ -38,15 +38,13 @@ function ProductCard({ product }) {
           )}
           <p className="text-primary text-2xl leading-9">${product.price}</p>
           {product.discount > 0 && (
-            <p className="text-primary text-lg leading-7">
-              {product.discount}% off
-            </p>
+            <p className="text-primary leading-7">{product.discount}% off</p>
           )}
         </div>
         <Link
-          href={`/products/${product?.title}?=ss`}
-          style={{ borderRadius: "32px 0px 12px 0px" }}
-          className="absolute right-0 bottom-0 w-44 h-11 flex items-center justify-center group-hover:bg-primary bg-[#F0D4EC] group-hover:text-primary-foreground text-[#605F5F] text-lg transition-all duration-300"
+          href={`/products/${product?.id}`}
+          style={{ borderRadius: "30px 0px 12px 0px" }}
+          className="absolute right-0 bottom-0 w-40 h-10 flex items-center justify-center group-hover:bg-primary bg-[#F0D4EC] group-hover:text-primary-foreground text-[#605F5F] text-lg transition-all duration-300"
         >
           Shop now
         </Link>
