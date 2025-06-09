@@ -1,20 +1,30 @@
 "use client";
 
 import { Accordion } from "@/components/ui/accordion";
+import { Products as products } from "@/data/Products";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FilterAccordion } from "./FilterAccordion";
 import Pagination from "./Pagination";
 import PriceRangeFilter from "./PriceRangeFilter";
 import ProductsGrid from "./ProductsGrid";
 import Show from "./Show";
 import SortBy from "./SortBy";
-// Sample product data (unchanged)
-import { Products as products } from "@/data/Products";
 
-export default function UniversalProductList({ params: pageName }) {
+export default function UniversalProductList({ params }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pageName = params || "new"; // Fix pageName assignment
+
+  // Memoize minPrice and maxPrice to ensure stability
+  const minPrice = useMemo(
+    () => Math.min(...products.map((p) => p.price)),
+    [products]
+  );
+  const maxPrice = useMemo(
+    () => Math.max(...products.map((p) => p.price)),
+    [products]
+  );
 
   // Filter states
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -22,39 +32,44 @@ export default function UniversalProductList({ params: pageName }) {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedAvailability, setSelectedAvailability] = useState([]);
-  const minPrice = Math.min(...products.map((p) => p.price));
-  const maxPrice = Math.max(...products.map((p) => p.price));
   const [priceRange, setPriceRange] = useState([minPrice, maxPrice]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(12); // Dynamic products per page
-  const [sortBy, setSortBy] = useState("default"); // Sorting state
+  const [productsPerPage, setProductsPerPage] = useState(12);
+  const [sortBy, setSortBy] = useState("default");
 
   // Available options for products per page
   const productsPerPageOptions = [12, 18, 20, 25];
 
-  // Pagination settings
-  const totalPages = Math.ceil(products.length / productsPerPage);
-
-  // Dynamically extract filter options from products
-  const categories = [
-    ...new Set(products.map((p) => p.category).filter(Boolean)),
-  ];
-  const brands = [...new Set(products.map((p) => p.brand).filter(Boolean))];
-  const colors = [...new Set(products.flatMap((p) => p.color).filter(Boolean))];
-  const sizes = [...new Set(products.flatMap((p) => p.size).filter(Boolean))];
+  // Dynamically extract filter options
+  const categories = useMemo(
+    () => [...new Set(products.map((p) => p.category).filter(Boolean))],
+    [products]
+  );
+  const brands = useMemo(
+    () => [...new Set(products.map((p) => p.brand).filter(Boolean))],
+    [products]
+  );
+  const colors = useMemo(
+    () => [...new Set(products.flatMap((p) => p.color || []).filter(Boolean))],
+    [products]
+  );
+  const sizes = useMemo(
+    () => [...new Set(products.flatMap((p) => p.size || []).filter(Boolean))],
+    [products]
+  );
   const availabilityOptions = ["In Stock", "Low Stock", "Out of Stock"];
 
-  // Function to determine availability status based on stock
-  const getAvailabilityStatus = (stock) => {
+  // Function to determine availability status
+  const getAvailabilityStatus = useCallback((stock) => {
     if (stock === 0) return "Out of Stock";
     if (stock >= 1 && stock <= 5) return "Low Stock";
     return "In Stock";
-  };
+  }, []);
 
-  // Load filters, page, products per page, and sort from URL on mount
+  // Load filters from URL on mount
   useEffect(() => {
     const filter = searchParams.get("filter")?.split(",").filter(Boolean) || [];
-    const price = searchParams.get("price")?.split("-").map(Number) || [
+    const price = searchParams.get("filter_price")?.split("-").map(Number) || [
       minPrice,
       maxPrice,
     ];
@@ -69,17 +84,23 @@ export default function UniversalProductList({ params: pageName }) {
     setSelectedAvailability(
       filter.filter((id) => availabilityOptions.includes(id))
     );
-    setPriceRange(price.length === 2 ? price : [minPrice, maxPrice]);
-    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+    setPriceRange(
+      price.length === 2 && !isNaN(price[0]) && !isNaN(price[1])
+        ? [Math.max(minPrice, price[0]), Math.min(maxPrice, price[1])]
+        : [minPrice, maxPrice]
+    );
+    setCurrentPage(
+      Math.max(1, Math.min(page, Math.ceil(products.length / perPage)))
+    );
     setProductsPerPage(productsPerPageOptions.includes(perPage) ? perPage : 12);
     setSortBy(
       ["default", "high-to-low", "low-to-high"].includes(sort)
         ? sort
         : "default"
     );
-  }, [searchParams]);
+  }, [searchParams, minPrice, maxPrice, categories, brands, colors, sizes]);
 
-  // Update URL when filters, page, products per page, or sort change
+  // Update URL when filters change
   useEffect(() => {
     const params = new URLSearchParams();
     const allFilters = [
@@ -94,7 +115,10 @@ export default function UniversalProductList({ params: pageName }) {
       params.set("filter", allFilters.join(","));
     }
     if (priceRange[0] !== minPrice || priceRange[1] !== maxPrice) {
-      params.set("price", `${priceRange[0]}-${priceRange[1]}`);
+      params.set(
+        "filter_price",
+        `${Math.round(priceRange[0])}-${Math.round(priceRange[1])}`
+      );
     }
     if (currentPage !== 1) {
       params.set("page", currentPage);
@@ -106,7 +130,10 @@ export default function UniversalProductList({ params: pageName }) {
       params.set("sort", sortBy);
     }
 
-    router.push(`/${pageName}?${params.toString()}`, { scroll: false });
+    const newUrl = `/${pageName}?${params.toString()}`;
+    if (window.location.pathname + window.location.search !== newUrl) {
+      router.push(newUrl, { scroll: false });
+    }
   }, [
     selectedCategories,
     selectedBrands,
@@ -118,98 +145,110 @@ export default function UniversalProductList({ params: pageName }) {
     productsPerPage,
     sortBy,
     router,
+    pageName,
+    minPrice,
+    maxPrice,
   ]);
 
   // Handle filter changes
-  const handleFilterChange = (value, setFilter) => {
+  const handleFilterChange = useCallback((value, setFilter) => {
     setFilter((prev) =>
       prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
     );
     setCurrentPage(1);
-  };
+  }, []);
 
   // Handle price range change
-  const handlePriceChange = (e, index) => {
-    const value = Number(e.target.value) || 0;
+  const handlePriceChange = useCallback((value, index) => {
     setPriceRange((prev) => {
       const newRange = [...prev];
       newRange[index] = value;
-      if (index === 0 && value > newRange[1]) {
-        newRange[1] = value;
-      } else if (index === 1 && value < newRange[0]) {
-        newRange[0] = value;
-      }
       return newRange;
     });
     setCurrentPage(1);
-  };
+  }, []);
 
   // Handle products per page change
-  const handleProductsPerPageChange = (e) => {
+  const handleProductsPerPageChange = useCallback((e) => {
     const newPerPage = Number(e.target.value);
     setProductsPerPage(newPerPage);
     setCurrentPage(1);
-  };
+  }, []);
 
   // Handle sort change
-  const handleSortChange = (e) => {
+  const handleSortChange = useCallback((e) => {
     setSortBy(e.target.value);
     setCurrentPage(1);
-  };
+  }, []);
 
-  // Handle page change with delayed scroll
-  const handlePageChange = (page) => {
+  // Handle page change
+  const handlePageChange = useCallback((page) => {
     setCurrentPage(page);
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "auto" });
     }, 100);
-  };
+  }, []);
 
   // Filter and sort products
-  const filteredProducts = products
-    .filter((product) => {
-      const categoryMatch =
-        selectedCategories.length === 0 ||
-        selectedCategories.includes(product.category);
-      const brandMatch =
-        selectedBrands.length === 0 ||
-        !product.brand ||
-        selectedBrands.includes(product.brand);
-      const colorMatch =
-        selectedColors.length === 0 ||
-        !product.color ||
-        product.color.some((c) => selectedColors.includes(c));
-      const sizeMatch =
-        selectedSizes.length === 0 ||
-        !product.size ||
-        product.size.some((s) => selectedSizes.includes(s));
-      const priceMatch =
-        product.price >= priceRange[0] && product.price <= priceRange[1];
-      const availabilityMatch =
-        selectedAvailability.length === 0 ||
-        selectedAvailability.includes(getAvailabilityStatus(product.stock));
-      return (
-        categoryMatch &&
-        brandMatch &&
-        colorMatch &&
-        sizeMatch &&
-        priceMatch &&
-        availabilityMatch
-      );
-    })
-    .sort((a, b) => {
-      if (sortBy === "high-to-low") {
-        return b.price - a.price;
-      } else if (sortBy === "low-to-high") {
-        return a.price - b.price;
-      }
-      return 0; // Default: no sorting
-    });
+  const filteredProducts = useMemo(
+    () =>
+      products
+        .filter((product) => {
+          const categoryMatch =
+            selectedCategories.length === 0 ||
+            selectedCategories.includes(product.category);
+          const brandMatch =
+            selectedBrands.length === 0 ||
+            !product.brand ||
+            selectedBrands.includes(product.brand);
+          const colorMatch =
+            selectedColors.length === 0 ||
+            !product.color ||
+            product.color.some((c) => selectedColors.includes(c));
+          const sizeMatch =
+            selectedSizes.length === 0 ||
+            !product.size ||
+            product.size.some((s) => selectedSizes.includes(s));
+          const priceMatch =
+            product.price >= priceRange[0] && product.price <= priceRange[1];
+          const availabilityMatch =
+            selectedAvailability.length === 0 ||
+            selectedAvailability.includes(getAvailabilityStatus(product.stock));
+          return (
+            categoryMatch &&
+            brandMatch &&
+            colorMatch &&
+            sizeMatch &&
+            priceMatch &&
+            availabilityMatch
+          );
+        })
+        .sort((a, b) => {
+          if (sortBy === "high-to-low") return b.price - a.price;
+          if (sortBy === "low-to-high") return a.price - b.price;
+          return 0;
+        }),
+    [
+      selectedCategories,
+      selectedBrands,
+      selectedColors,
+      selectedSizes,
+      selectedAvailability,
+      priceRange,
+      sortBy,
+      getAvailabilityStatus,
+      products,
+    ]
+  );
 
   // Paginate filtered products
-  const paginatedProducts = filteredProducts.slice(
-    (currentPage - 1) * productsPerPage,
-    currentPage * productsPerPage
+  const paginatedProducts = useMemo(
+    () =>
+      filteredProducts.slice(
+        (currentPage - 1) * productsPerPage,
+        currentPage * productsPerPage
+      ),
+    [filteredProducts, currentPage, productsPerPage]
   );
   const filteredTotalPages = Math.ceil(
     filteredProducts.length / productsPerPage
@@ -219,22 +258,18 @@ export default function UniversalProductList({ params: pageName }) {
     <div className="container mx-auto px-4 py-6 flex gap-6">
       {/* Sidebar Filters */}
       <div className="w-[325px] h-fit">
-        {/* Price Range Filter */}
         <PriceRangeFilter
-          products={products}
           minPrice={minPrice}
           maxPrice={maxPrice}
           priceRange={priceRange}
           handlePriceChange={handlePriceChange}
         />
-        {/* Accordion for Filters */}
         <Accordion
           defaultValue="availability"
           type="multiple"
           collapsible
           className="w-full space-y-2"
         >
-          {/* Availability Filter */}
           {products.some((p) => p.stock !== undefined) && (
             <FilterAccordion
               title="Availability"
@@ -246,8 +281,6 @@ export default function UniversalProductList({ params: pageName }) {
               valueKey="availability"
             />
           )}
-
-          {/* Category Filter */}
           <FilterAccordion
             title="Category"
             options={categories}
@@ -257,8 +290,6 @@ export default function UniversalProductList({ params: pageName }) {
             }
             valueKey="categories"
           />
-
-          {/* Brand Filter */}
           <FilterAccordion
             title="Brand"
             options={brands}
@@ -266,8 +297,6 @@ export default function UniversalProductList({ params: pageName }) {
             onChange={(option) => handleFilterChange(option, setSelectedBrands)}
             valueKey="brands"
           />
-
-          {/* Color Filter */}
           <FilterAccordion
             title="Color"
             options={colors}
@@ -275,8 +304,6 @@ export default function UniversalProductList({ params: pageName }) {
             onChange={(option) => handleFilterChange(option, setSelectedColors)}
             valueKey="colors"
           />
-
-          {/* Size Filter  */}
           <FilterAccordion
             title="Size"
             options={sizes}
@@ -302,14 +329,25 @@ export default function UniversalProductList({ params: pageName }) {
         </div>
         {/* Main Section */}
         <div className="w-full h-full">
-          {/* Product Grid */}
-          <ProductsGrid paginatedProducts={paginatedProducts} />
-          {/* Pagination */}
-          <Pagination
-            filteredTotalPages={filteredTotalPages}
-            currentPage={currentPage}
-            handlePageChange={handlePageChange}
-          />
+          {paginatedProducts.length === 0 ? (
+            <div className="text-center py-10">
+              <h2 className="text-2xl font-semibold text-gray-600">
+                No Products Found
+              </h2>
+              <p className="text-gray-500 mt-2">
+                Try adjusting your filters to find more products.
+              </p>
+            </div>
+          ) : (
+            <>
+              <ProductsGrid paginatedProducts={paginatedProducts} />
+              <Pagination
+                filteredTotalPages={filteredTotalPages}
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>
