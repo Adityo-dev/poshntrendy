@@ -32,7 +32,7 @@ const categories = [
 
 function Categories() {
   return (
-    <section className="container mx-auto px-4 py-16">
+    <section className="container mx-auto px-2 lg:px-4 py-8 lg:py-16">
       <div className="flex justify-between items-center mb-4 sm:mb-12">
         <h3 className="text-[#0D0C0D] text-lg sm:text-4xl font-semibold">
           SHOP BY CATEGORIES
