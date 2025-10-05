@@ -2,7 +2,7 @@ import SubscriptionForm from "./SubscriptionForm";
 
 function StayTuned() {
   return (
-    <div className="container mx-auto px-4 py-8 grid grid-cols-12">
+    <div className="container mx-auto px-4 py-8 grid grid-cols-12 hidden xl:block">
       <div className="col-span-7">
         <div className="flex items-center gap-3">
           <svg
