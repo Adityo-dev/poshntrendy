@@ -20,10 +20,13 @@ const rightSide = [
 
 function CenterNavigationBar() {
   return (
-    <header className="bg-white">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="bg-white shadow-2xl">
+      <div className="container mx-auto px-4 py-2 sm:py-4 flex items-center justify-between">
         {/* Left Side Logo */}
-        <Link href={"/"} className="w-[160px] h-[65px]">
+        <Link
+          href={"/"}
+          className="w-[120px] sm:w-[160px] h-[45px] sm:h-[65px]"
+        >
           <Image
             src={"/logo/Posh_N_Trendy___Logo.png"}
             width={400}
@@ -34,7 +37,7 @@ function CenterNavigationBar() {
         </Link>
 
         {/* Center Search bar */}
-        <div className="flex-1 max-w-2xl">
+        <div className="hidden lg:block flex-1 max-w-2xl">
           <SearchBar />
         </div>
 

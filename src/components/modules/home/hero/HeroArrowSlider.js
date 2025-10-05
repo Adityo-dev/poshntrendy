@@ -19,7 +19,7 @@ function HeroArrowSlider({ categoryData }) {
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group mt-4 sm:mt-0">
       <Swiper
         ref={swiperRef}
         modules={[Autoplay, Navigation]}

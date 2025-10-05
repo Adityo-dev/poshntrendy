@@ -51,7 +51,7 @@ function Brands() {
             href={`/shop?filter=${brand?.title}`}
             key={brand?.id}
             className={`relative group overflow-hidden rounded-xl sm:rounded-2xl ${
-              index === 0 || index === 5 ? "sm:col-span-2" : ""
+              index === 0 || index === 5 ? "sm:col-span-2" : null
             }`}
           >
             <Image
@@ -59,7 +59,7 @@ function Brands() {
               width={600}
               height={800}
               alt={brand?.title}
-              className="w-full h-full max-h-[600px] object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex flex-col justify-end p-4 sm:p-6">
               <p className="text-white text-lg sm:text-xl font-semibold uppercase">
