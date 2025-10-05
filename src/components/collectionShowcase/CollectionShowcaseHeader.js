@@ -8,22 +8,24 @@ function CollectionShowcaseHeader({
   isGradient,
 }) {
   return (
-    <div className="flex justify-between mb-12">
-      <div className="w-1/2">
+    <div className="flex justify-between mb-4 lg:mb-12">
+      <div className="w-full lg:w-1/2">
         {title && (
-          <h3 className="text-[#0D0C0D] text-4xl font-semibold uppercase">
+          <h3 className="text-[#0D0C0D] text-lg lg:text-4xl font-semibold uppercase">
             {title}
           </h3>
         )}
         {description && (
-          <p className="text-[#605F5F] text-lg mt-3">{description}</p>
+          <p className="text-[#605F5F] text-base sm:text-lg mt-3">
+            {description}
+          </p>
         )}
       </div>
       <Link
         href={viewBtnLink}
-        className={`w-36 h-10 border-2 border-primary flex items-center justify-center rounded-full ${
+        className={`w-36 h-8 lg:h-10 border-2 border-primary flex items-center justify-center rounded-full ${
           isGradient ? "bg-primary text-primary-foreground" : "text-[#A5A5A5]"
-        } text-lg`}
+        } text-sm lg:text-lg`}
       >
         {viewBtnText}
       </Link>
