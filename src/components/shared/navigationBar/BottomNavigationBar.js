@@ -82,7 +82,7 @@ export function BottomNavigationBar() {
   const pathname = usePathname();
 
   return (
-    <section className="bg-[#400A38]">
+    <section className="bg-[#400A38] hidden lg:block">
       <NavigationMenu className="container mx-auto px-4 py-4 flex items-center justify-center">
         <NavigationMenuList className="flex gap-6">
           {navigationData.map((item, index) => {
