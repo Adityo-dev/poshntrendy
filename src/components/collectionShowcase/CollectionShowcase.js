@@ -23,7 +23,7 @@ function CollectionShowcase({
         }}
         className={isGradient}
       >
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-2 lg:px-4 py-8 lg:py-16">
           <CollectionShowcaseHeader
             title={title}
             description={description}
